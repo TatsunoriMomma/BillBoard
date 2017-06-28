@@ -17,7 +17,7 @@ public class UserDao {
 	public User getUser(Connection connection, String loginId, String password) {
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM user WHERE (login_id = ?) AND password = ?";
+			String sql = "SELECT * FROM users WHERE (login_id = ?) AND password = ?";
 
 			ps = connection.prepareStatement(sql);
 			ps.setString(1, loginId);
@@ -71,7 +71,7 @@ public class UserDao {
 		PreparedStatement ps = null;
 		try{
 			StringBuilder sql = new StringBuilder();
-			sql.append("INSERT INTO user( ");
+			sql.append("INSERT INTO users( ");
 			sql.append("login_id");
 			sql.append(", password");
 			sql.append(", name");
@@ -95,8 +95,6 @@ public class UserDao {
 			ps.setInt(4, user.getBranch_id());
 			ps.setInt(5, user.getDepartment_id());
 			ps.setInt(6, user.getIs_working());
-
-			System.out.println(ps);
 
 			ps.executeUpdate();
 		} catch (SQLException e) {

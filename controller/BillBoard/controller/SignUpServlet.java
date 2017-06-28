@@ -38,9 +38,9 @@ public class SignUpServlet extends HttpServlet {
 		user.setLogin_id(request.getParameter("loginId"));
 		user.setName(request.getParameter("name"));
 		user.setPassword(request.getParameter("password"));
-		user.setBranch(Integer.parseInt(request.getParameter("branch")));
-		user.setDepartment(Integer.parseInt(request.getParameter("department")));
-		user.setStatus("continue");
+		user.setBranch_id(Integer.parseInt(request.getParameter("branch_id")));
+		user.setDepartment_id(Integer.parseInt(request.getParameter("department_id")));
+		user.setIs_working(0);
 
 
 		if (isValid(request, messages) == true) {

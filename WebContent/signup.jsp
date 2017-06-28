@@ -24,13 +24,13 @@
 	<label for="checkPassword">パスワード(確認用)</label>
 	<input name="checkPassword" id="checkPassword"/> <br />
 
-	<label for="branch">支店</label>
-	<select name="branch" id="branch">
+	<label for="branch_id">支店</label>
+	<select name="branch_id" id="branch_id">
 	<option value=1>1</option>
 	</select> <br />
 
-	<label for="department">部署・役職</label>
-	<select name="department" id="department">
+	<label for="department_id">部署・役職</label>
+	<select name="department_id" id="department_id">
 	<option value=1>1</option>
 	</select> <br />
 
