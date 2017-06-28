@@ -14,8 +14,8 @@
 <div class="main-contents">
 
 
-<a href="newContribution">新規投稿</a>
-<a href="userManagement.jsp">ユーザー管理</a>
+<a href="contribution.jsp">新規投稿</a>
+<a href="management.jsp">ユーザー管理</a>
 <a href="logout">ログアウト</a>
 <c:if test="${not empty loginUser }">
 	<div class="profile">

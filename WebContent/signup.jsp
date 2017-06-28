@@ -31,7 +31,10 @@
 
 	<label for="department_id">部署・役職</label>
 	<select name="department_id" id="department_id">
-	<option value=1>1</option>
+	<option value=1>本社</option>
+	<option value=2>支店A</option>
+	<option value=3>支店B</option>
+	<option value=4>支店C</option>
 	</select> <br />
 
 	<input type="submit" value="登録" /> <br />
