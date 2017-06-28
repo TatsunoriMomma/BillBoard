@@ -8,9 +8,10 @@ public class User implements Serializable{
 	private String login_id;
 	private String password;
 	private String name;
-	private int branch;
-	private int department;
-	private String status;
+	private int branch_id;
+	private int department_id;
+	private int is_working;
+
 
 	public String getLogin_id() {
 		return login_id;
@@ -30,22 +31,24 @@ public class User implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getBranch() {
-		return branch;
+	public int getBranch_id() {
+		return branch_id;
 	}
-	public void setBranch(int branch) {
-		this.branch = branch;
+	public void setBranch_id(int branch_id) {
+		this.branch_id = branch_id;
 	}
-	public int getDepartment() {
-		return department;
+	public int getDepartment_id() {
+		return department_id;
 	}
-	public void setDepartment(int department) {
-		this.department = department;
+	public void setDepartment_id(int department_id) {
+		this.department_id = department_id;
 	}
-	public String getStatus() {
-		return status;
+	public int getIs_working() {
+		return is_working;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setIs_working(int is_working) {
+		this.is_working = is_working;
 	}
+
+
 }

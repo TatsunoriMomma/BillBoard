@@ -46,17 +46,17 @@ public class UserDao {
 				String login_id = rs.getString("login_id");
 				String password = rs.getString("password");
 				String name = rs.getString("name");
-				int branch = rs.getInt("branch");
-				int department = rs.getInt("department");
-				String status = rs.getString("status");
+				int branch_id = rs.getInt("branch_id");
+				int department_id = rs.getInt("department_id");
+				int is_working = rs.getInt("is_working");
 
 				User user = new User();
 				user.setLogin_id(login_id);
 				user.setPassword(password);
 				user.setName(name);
-				user.setBranch(branch);
-				user.setDepartment(department);
-				user.setStatus(status);
+				user.setBranch_id(branch_id);
+				user.setDepartment_id(department_id);
+				user.setIs_working(is_working);
 
 				ret.add(user);
 			}
@@ -75,16 +75,16 @@ public class UserDao {
 			sql.append("login_id");
 			sql.append(", password");
 			sql.append(", name");
-			sql.append(", branch");
-			sql.append(", department");
-			sql.append(", status");
+			sql.append(", branch_id");
+			sql.append(", department_id");
+			sql.append(", is_working");
 			sql.append(") VALUES (");
 			sql.append("?");  //login_id
 			sql.append(", ?"); //password
 			sql.append(", ?"); //name
-			sql.append(", ?"); //branch
-			sql.append(", ?"); //department
-			sql.append(", ?"); //status
+			sql.append(", ?"); //branch_id
+			sql.append(", ?"); //department_id
+			sql.append(", ?"); //is_working
 			sql.append(")");
 
 			ps = connection.prepareStatement(sql.toString());
@@ -92,9 +92,9 @@ public class UserDao {
 			ps.setString(1, user.getLogin_id());
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getName());
-			ps.setInt(4, user.getBranch());
-			ps.setInt(5, user.getDepartment());
-			ps.setString(6, user.getStatus());
+			ps.setInt(4, user.getBranch_id());
+			ps.setInt(5, user.getDepartment_id());
+			ps.setInt(6, user.getIs_working());
 
 			System.out.println(ps);
 
