@@ -9,6 +9,8 @@
 <title>新規投稿</title>
 </head>
 <body>
+<a href="./">ホーム</a>
+<a href="logout">ログアウト</a>
 <div class="main-contents">
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">

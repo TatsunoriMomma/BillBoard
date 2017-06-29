@@ -47,7 +47,7 @@ public class SignUpServlet extends HttpServlet {
 
 			new UserService().register(user);
 
-			response.sendRedirect("management.jsp");
+			response.sendRedirect("management");
 		} else {
 			session.setAttribute("errorMessages", messages);
 
@@ -58,8 +58,8 @@ public class SignUpServlet extends HttpServlet {
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 		String loginId = request.getParameter("loginId");
-		String password = request.getParameter("password");
 		String name = request.getParameter("name");
+		String password = request.getParameter("password");
 
 		if (StringUtils.isEmpty(loginId) == true) {
 			messages.add("ログインIDを入力してください");

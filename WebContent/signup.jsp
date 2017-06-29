@@ -10,13 +10,25 @@
 	<link href="./css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<a href="./">ホーム</a>
+<a href="logout">ログアウト</a>
 <div class="main-contents">
+<c:if test="${ not empty errorMessages }">
+	<div class="errorMessages">
+		<ul>
+			<c:forEach items="${errorMessages}" var="message">
+				<li><c:out value="${message}" />
+			</c:forEach>
+		</ul>
+	</div>
+	<c:remove var="errorMessages" scope="session"/>
+</c:if>
 <form action="signup" method="post"><br />
 	<label for="loginId">ログインID</label>
 	<input name="loginId" id="loginId" value="${user.login_id}"/>半角英数6文字以上20字以下<br />
 
 	<label for="name">名前</label>
-	<input name="name" id="name"/>10文字以下<br />
+	<input name="name" id="name" value="${user.name}"/>10文字以下<br />
 
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/> <br />
@@ -41,7 +53,6 @@
 	</select> <br />
 
 	<input type="submit" value="登録" /> <br />
-	<a href="./">戻る</a>
 </form>
 </div>
 </body>

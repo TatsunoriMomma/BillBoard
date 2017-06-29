@@ -9,6 +9,8 @@
 <title>ユーザー編集</title>
 </head>
 <body>
+<a href="./">ホーム</a>
+<a href="logout">ログアウト</a>
 <div class="main-contents">
 
 <c:if test="${ not empty errorMessages }">
@@ -33,11 +35,11 @@
 	<input name="password" type="password" id="password"/> <br />
 
 	<label for="check_password">パスワード（確認用）</label>
-	<input name="check_password"  id="email"/> <br />
+	<input name="check_password" type="password" id="password"/> <br />
 
 	<label for="department_id">支店</label>
 	<select name="department_id" id="department_id">
-	<option value=1>本社</option>
+	<option value=1 selected>本社</option>
 	<option value=2>支店A</option>
 	<option value=3>支店B</option>
 	<option value=4>支店C</option>
@@ -51,7 +53,6 @@
 	<option value=4>支店長</option>
 	</select> <br />
 	<input type="submit" value="登録" /> <br />
-	<a href="./">戻る</a>
 </form>
 </div>
 </body>

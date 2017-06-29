@@ -9,6 +9,9 @@
 <title>ユーザー管理</title>
 </head>
 <body>
+<a href="./">ホーム</a>
+<a href="logout">ログアウト</a>
+<div class="main-contents">
 <a href="signup">ユーザー新規登録</a>
 <a href="edit">ユーザー編集</a>
 <div class="users">
@@ -26,6 +29,7 @@
 			<div class="edit"><button type="submit" >削除</button></div>
 		</div>
 	</c:forEach>
+</div>
 </div>
 </body>
 </html>
