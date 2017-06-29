@@ -6,10 +6,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import BillBoard.beans.User;
+import BillBoard.exception.NoRowsUpdatedRuntimeException;
 import BillBoard.exception.SQLRuntimeException;
 
 public class UserDao {
@@ -43,6 +45,7 @@ public class UserDao {
 		List<User> ret = new ArrayList<User>();
 		try {
 			while(rs.next()) {
+				int user_id = rs.getInt("user_id");
 				String login_id = rs.getString("login_id");
 				String password = rs.getString("password");
 				String name = rs.getString("name");
@@ -51,6 +54,7 @@ public class UserDao {
 				int is_working = rs.getInt("is_working");
 
 				User user = new User();
+				user.setUser_id(user_id);
 				user.setLogin_id(login_id);
 				user.setPassword(password);
 				user.setName(name);
@@ -103,4 +107,91 @@ public class UserDao {
 			close(ps);
 		}
 	}
+
+	public void update(Connection connection, User user) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE users SET");
+			sql.append("  login_id = ?");
+			sql.append(", password = ?");
+			sql.append(", name = ?");
+			sql.append(", branch_id = ?");
+			sql.append(", department_id = ?");
+			sql.append(", update_date = CURRENT_TIMESTAMP");
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+			sql.append(" AND");
+			sql.append(" update_date = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setString(1, user.getLogin_id());
+			ps.setString(2, user.getPassword());
+			ps.setString(3, user.getName());
+			ps.setInt(4, user.getBranch_id());
+			ps.setInt(5, user.getDepartment_id());
+			ps.setInt(6, user.getUser_id());
+			ps.setTimestamp(7, new Timestamp(user.getUpdate_date().getTime()));
+
+			int count = ps.executeUpdate();
+			if (count == 0) {
+				throw new NoRowsUpdatedRuntimeException();
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+
+	}
+
+	public List<User> getAllUserList(Connection connection) {
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM users ";
+
+			ps = connection.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			List<User> userList = toUserList(rs);
+			if (userList.isEmpty() == true) {
+				return null;
+			}
+			return userList;
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	/*
+	public User getUser(Connection connection, int user_id) {
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM users WHERE user_id = ?";
+
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, loginId);
+
+			ResultSet rs = ps.executeQuery();
+			List<User> userList = toUserList(rs);
+			if (userList.isEmpty() == true) {
+				return null;
+			} else if (2 <= userList.size()) {
+				throw new IllegalStateException("2 <= userList.size()");
+			} else {
+				return userList.get(0);
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+	*/
 }

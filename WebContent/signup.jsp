@@ -21,20 +21,23 @@
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/> <br />
 
-	<label for="checkPassword">パスワード(確認用)</label>
-	<input name="checkPassword" id="checkPassword"/> <br />
+	<label for="check_password">パスワード(確認用)</label>
+	<input name="check_password" id="check_password"/> <br />
 
 	<label for="branch_id">支店</label>
 	<select name="branch_id" id="branch_id">
-	<option value=1>1</option>
-	</select> <br />
-
-	<label for="department_id">部署・役職</label>
-	<select name="department_id" id="department_id">
 	<option value=1>本社</option>
 	<option value=2>支店A</option>
 	<option value=3>支店B</option>
 	<option value=4>支店C</option>
+	</select> <br />
+
+	<label for="department_id">部署・役職</label>
+	<select name="department_id" id="department_id">
+	<option value=1>総務人事</option>
+	<option value=2>情報管理</option>
+	<option value=3>社員</option>
+	<option value=4>支店長</option>
 	</select> <br />
 
 	<input type="submit" value="登録" /> <br />

@@ -1,5 +1,5 @@
 package BillBoard.exception;
 
-public class NoRowsUpdateddRuntimeException extends RuntimeException{
+public class NoRowsUpdatedRuntimeException extends RuntimeException{
 	private static final long serialVersionUID = 1L;
 }

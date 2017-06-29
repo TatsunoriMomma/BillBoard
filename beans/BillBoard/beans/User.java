@@ -1,18 +1,26 @@
 package BillBoard.beans;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	private int user_id;
 	private String login_id;
 	private String password;
 	private String name;
 	private int branch_id;
 	private int department_id;
+	private Date update_date;
 	private int is_working;
 
-
+	public int getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
 	public String getLogin_id() {
 		return login_id;
 	}
@@ -48,6 +56,13 @@ public class User implements Serializable{
 	}
 	public void setIs_working(int is_working) {
 		this.is_working = is_working;
+	}
+	public Date getUpdate_date() {
+		return update_date;
+	}
+
+	public void setUpdateDate(Date update_date) {
+		this.update_date = update_date;
 	}
 
 

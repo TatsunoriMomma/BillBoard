@@ -47,11 +47,10 @@ public class SignUpServlet extends HttpServlet {
 
 			new UserService().register(user);
 
-			response.sendRedirect("userManagement.jsp");
+			response.sendRedirect("management.jsp");
 		} else {
 			session.setAttribute("errorMessages", messages);
 
-//			response.sendRedirect("signup");
 			request.setAttribute("user", user);
 			request.getRequestDispatcher("signup.jsp").forward(request, response);
 		}
