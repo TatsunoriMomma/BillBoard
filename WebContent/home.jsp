@@ -13,7 +13,6 @@
 <body>
 <div class="main-contents">
 
-
 <a href="contribution">新規投稿</a>
 <a href="management">ユーザー管理</a>
 <a href="logout">ログアウト</a>
@@ -23,18 +22,32 @@
 </div>
 	</div>
 </c:if>
-<div class="messages">
-	<c:forEach items="${messages}" var="message">
-		<div class="message-icon">
-			<div class="message">
-				<div class="account-name">
-					<span class="account"><c:out value="${message.account}"/></span>
-					<span class="name"><c:out value="${message.name}"/></span>
+<div class="contributions">
+	<c:forEach items="${contributions}" var="contribution">
+		<div class="contribution">
+			<div class="subject">件名:<c:out value="${contribution.subject}"/></div>
+			<div class="text"><c:out value="${contribution.text}"/></div>
+			<div class="category">カテゴリー:<c:out value="${contribution.category}" /></div>
+			<div class="user_id">名前:<c:out value="${contribution.user_id}" /></div>
+			<div class="insert_date">投稿日時:<fmt:formatDate value="${contribution.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
+			<form action="comment" method="post"><br />
+				<label for="text"></label>
+				<input name="text" id="text" /><br />
+				<input type="hidden" name="contributionId" id="contribution" value="${contribution.contribution_id}" /><br />
+				<input type="submit" value="コメントする" /><br />
+				<c:forEach items="${comments}" var="comment">
+					<div class="comment">
+						<c:if test="${contribution.contribution_id == comment.contribution_id}" >
+							<div class="name">名前<c:out value="${comment.user_id}" /></div>
+							<div class="text"><c:out value="${comment.text}" /></div>
+							<div class="insert_date">投稿日時:<fmt:formatDate value="${comment.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
+						</c:if>
 					</div>
-					<div class="text"><c:out value="${message.text}" /></div>
-					<div class="date"><fmt:formatDate value="${message.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
-			</div>
+					<br>
+				</c:forEach>
+			</form>
 		</div>
+		<br>
 	</c:forEach>
 </div>
 </div>

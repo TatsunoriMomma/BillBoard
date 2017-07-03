@@ -31,25 +31,28 @@
 	<input name="name" id="name" value="${user.name}"/>10文字以下<br />
 
 	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password"/> <br />
+	<input name="password" type="password" id="password"/>6文字以上20字以下<br />
 
-	<label for="check_password">パスワード(確認用)</label>
-	<input name="check_password" id="check_password"/> <br />
+	<label for="checkPassword">パスワード(確認用)</label>
+	<input name="checkPassword" id="checkPassword"/> <br />
 
-	<label for="branch_id">支店</label>
-	<select name="branch_id" id="branch_id">
-	<option value=1>本社</option>
-	<option value=2>支店A</option>
-	<option value=3>支店B</option>
-	<option value=4>支店C</option>
+	<label for="branchId">支店</label>
+	<select name="branchId" id="branchId">
+
+	<c:forEach items="${branches}" var="branch">
+		<option value="${branch.branch_id}">
+		<c:out value="${branch.name}" />
+		</option>
+	</c:forEach>
 	</select> <br />
 
-	<label for="department_id">部署・役職</label>
-	<select name="department_id" id="department_id">
-	<option value=1>総務人事</option>
-	<option value=2>情報管理</option>
-	<option value=3>社員</option>
-	<option value=4>支店長</option>
+	<label for="departmentId">部署</label>
+	<select name="departmentId" id="departmentId">
+	<c:forEach items="${departments}" var="department">
+		<option value="${department.department_id}">
+		<c:out value="${department.name}" />
+		</option>
+	</c:forEach>
 	</select> <br />
 
 	<input type="submit" value="登録" /> <br />

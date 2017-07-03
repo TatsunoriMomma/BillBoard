@@ -13,7 +13,6 @@
 <a href="logout">ログアウト</a>
 <div class="main-contents">
 <a href="signup">ユーザー新規登録</a>
-<a href="edit">ユーザー編集</a>
 <div class="users">
 	<c:forEach items="${users}" var="user">
 		<div class="user">
@@ -21,10 +20,30 @@
 				<span class="name"><c:out value="${user.name}" /></span>
 			</div>
 			<div class="login_id"><c:out value="${user.login_id}" /></div>
-			<div class="branch"><c:out value="${user.branch_id}" /></div>
-			<div class="department"><c:out value="${user.department_id}" /></div>
+
+			<div class="branch">
+			<c:forEach items="${branches}" var="branch">
+				<c:if test="${user.branch_id == branch.branch_id}" >
+				<c:out value="${branch.name}" />
+				</c:if>
+			</c:forEach>
+			</div>
+
+			<div class="department">
+			<c:forEach items="${departments}" var="department">
+				<c:if test="${user.department_id == department.department_id}" >
+				<c:out value="${department.name}" />
+				</c:if>
+			</c:forEach>
+			</div>
+
 			<div class="is_working"><c:out value="${user.is_working}" /></div>
-			<div class="edit"><button type="submit" >編集</button></div>
+			<div class="edit">
+			<form action="edit" method="get">
+			<input type="hidden" name="editUserId" id="editUserId" value="${user.user_id}" /><br />
+			<input type="submit" value="編集" /> <br />
+			</form>
+			</div>
 			<div class="edit"><button type="submit" >停止</button></div>
 			<div class="edit"><button type="submit" >削除</button></div>
 		</div>

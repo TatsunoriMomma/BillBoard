@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet{
 
 		if(user != null) {
 			session.setAttribute("loginUser", user);
-			response.sendRedirect("home.jsp");
+			response.sendRedirect("./");
 		} else {
 			List<String> messages = new ArrayList<String>();
 			messages.add("ログインに失敗しました");

@@ -65,9 +65,10 @@ public class UserService {
 		try {
 			connection = getConnection();
 
-			String encPassword = CipherUtil.encrypt(user.getPassword());
-			user.setPassword(encPassword);
-
+			if(user.getPassword() != null){
+				String encPassword = CipherUtil.encrypt(user.getPassword());
+				user.setPassword(encPassword);
+			}
 			UserDao userDao = new UserDao();
 			userDao.update(connection, user);
 
@@ -82,7 +83,7 @@ public class UserService {
 			close(connection);
 		}
 	}
-	/*
+
 	public User getUser(int loginId) {
 
 		Connection connection = null;
@@ -105,5 +106,4 @@ public class UserService {
 			close(connection);
 		}
 	}
-	*/
 }

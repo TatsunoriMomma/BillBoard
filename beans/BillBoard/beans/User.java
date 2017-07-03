@@ -60,7 +60,6 @@ public class User implements Serializable{
 	public Date getUpdate_date() {
 		return update_date;
 	}
-
 	public void setUpdateDate(Date update_date) {
 		this.update_date = update_date;
 	}

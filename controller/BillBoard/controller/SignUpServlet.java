@@ -13,7 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
+import BillBoard.beans.Branch;
+import BillBoard.beans.Department;
 import BillBoard.beans.User;
+import BillBoard.service.BranchService;
+import BillBoard.service.DepartmentService;
 import BillBoard.service.UserService;
 
 @WebServlet(urlPatterns = { "/signup" })
@@ -24,6 +28,11 @@ public class SignUpServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
+		List<Branch> branches = new BranchService().getAllBranch();
+		List<Department> departments = new DepartmentService().getAllDepartment();
+
+		request.setAttribute("branches", branches);
+		request.setAttribute("departments", departments);
 		request.getRequestDispatcher("signup.jsp").forward(request, response);
 	}
 
@@ -32,14 +41,17 @@ public class SignUpServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 
 		List<String> messages = new ArrayList<String>();
+		List<Branch> branches = new BranchService().getAllBranch();
+		List<Department> departments = new DepartmentService().getAllDepartment();
+
 
 		HttpSession session = request.getSession();
 		User user = new User();
 		user.setLogin_id(request.getParameter("loginId"));
 		user.setName(request.getParameter("name"));
 		user.setPassword(request.getParameter("password"));
-		user.setBranch_id(Integer.parseInt(request.getParameter("branch_id")));
-		user.setDepartment_id(Integer.parseInt(request.getParameter("department_id")));
+		user.setBranch_id(Integer.parseInt(request.getParameter("branchId")));
+		user.setDepartment_id(Integer.parseInt(request.getParameter("departmentId")));
 		user.setIs_working(0);
 
 
@@ -52,6 +64,8 @@ public class SignUpServlet extends HttpServlet {
 			session.setAttribute("errorMessages", messages);
 
 			request.setAttribute("user", user);
+			request.setAttribute("branches", branches);
+			request.setAttribute("departments", departments);
 			request.getRequestDispatcher("signup.jsp").forward(request, response);
 		}
 	}
@@ -61,16 +75,28 @@ public class SignUpServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 
-		if (StringUtils.isEmpty(loginId) == true) {
+		if (StringUtils.isBlank(loginId) == true) {
 			messages.add("ログインIDを入力してください");
+		} else if (!loginId.matches("\\w*") == true){
+			messages.add("入力できる文字は半角英数字のみです");
+		} else if (loginId.length() < 6 || loginId.length() > 20){
+				messages.add("ログインIDの桁数に誤りがあります");
 		}
-		if (StringUtils.isEmpty(name) == true) {
+
+		//else if (isLoginId != null && isLoginId.getId() != id ){
+		//	messages.add("指定されたログインIDは既に使用されています");
+		//}
+
+		if (password.length() < 6 || password.length() > 255){
+			messages.add("パスワードの桁数に誤りがあります");
+		}
+		//else if (!passwordConfirmation.equals(password)){
+		//messages.add("パスワード（確認用）が正しくありません");
+		//}
+
+		if(StringUtils.isBlank(name) == true){
 			messages.add("名前を入力してください");
 		}
-		if (StringUtils.isEmpty(password) == true) {
-			messages.add("パスワードを入力してください");
-		}
-		// TODO アカウントが既に利用されていないか、メールアドレスが既に登録されていないかなどの確認も必要
 		if (messages.size() == 0) {
 			return true;
 		} else {

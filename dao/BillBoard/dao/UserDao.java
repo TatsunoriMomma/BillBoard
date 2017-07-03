@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,25 +114,31 @@ public class UserDao {
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE users SET");
 			sql.append("  login_id = ?");
-			sql.append(", password = ?");
 			sql.append(", name = ?");
 			sql.append(", branch_id = ?");
 			sql.append(", department_id = ?");
 			sql.append(", update_date = CURRENT_TIMESTAMP");
+			if(user.getPassword() != null){
+				sql.append(", password = ?");
+			}
 			sql.append(" WHERE");
-			sql.append(" id = ?");
-			sql.append(" AND");
-			sql.append(" update_date = ?");
+			sql.append(" user_id = ?");
 
 			ps = connection.prepareStatement(sql.toString());
 
 			ps.setString(1, user.getLogin_id());
-			ps.setString(2, user.getPassword());
-			ps.setString(3, user.getName());
-			ps.setInt(4, user.getBranch_id());
-			ps.setInt(5, user.getDepartment_id());
-			ps.setInt(6, user.getUser_id());
-			ps.setTimestamp(7, new Timestamp(user.getUpdate_date().getTime()));
+			ps.setString(2, user.getName());
+			ps.setInt(3, user.getBranch_id());
+			ps.setInt(4, user.getDepartment_id());
+
+			if(user.getPassword() == null){
+				ps.setInt(5, user.getUser_id());
+			}
+			else{
+				ps.setString(5, user.getPassword());
+				ps.setInt(6, user.getUser_id());
+			}
+
 
 			int count = ps.executeUpdate();
 			if (count == 0) {
@@ -168,7 +173,7 @@ public class UserDao {
 		}
 	}
 
-	/*
+
 	public User getUser(Connection connection, int user_id) {
 
 		PreparedStatement ps = null;
@@ -176,7 +181,7 @@ public class UserDao {
 			String sql = "SELECT * FROM users WHERE user_id = ?";
 
 			ps = connection.prepareStatement(sql);
-			ps.setInt(1, loginId);
+			ps.setInt(1, user_id);
 
 			ResultSet rs = ps.executeQuery();
 			List<User> userList = toUserList(rs);
@@ -193,5 +198,5 @@ public class UserDao {
 			close(ps);
 		}
 	}
-	*/
+
 }
