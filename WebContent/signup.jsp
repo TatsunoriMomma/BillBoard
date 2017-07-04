@@ -38,9 +38,11 @@
 
 	<label for="branchId">支店</label>
 	<select name="branchId" id="branchId">
-
+	<option value=0 ><c:out value="選択してください" />
 	<c:forEach items="${branches}" var="branch">
-		<option value="${branch.branch_id}">
+		<option value="${branch.branch_id}"
+		<c:if test="${user.branch_id == branch.branch_id}" >selected</c:if>
+		>
 		<c:out value="${branch.name}" />
 		</option>
 	</c:forEach>
@@ -48,8 +50,11 @@
 
 	<label for="departmentId">部署</label>
 	<select name="departmentId" id="departmentId">
+	<option value=0 ><c:out value="選択してください" />
 	<c:forEach items="${departments}" var="department">
-		<option value="${department.department_id}">
+		<option value="${department.department_id}"
+		<c:if test="${user.department_id == department.department_id}" >selected</c:if>
+		>
 		<c:out value="${department.name}" />
 		</option>
 	</c:forEach>

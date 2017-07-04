@@ -152,6 +152,32 @@ public class UserDao {
 
 	}
 
+	public void isWorkingSwitch(Connection connection, int userId, int status) {
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE users SET");
+			sql.append("  is_working = ?");
+			sql.append(", update_date = CURRENT_TIMESTAMP");
+			sql.append(" WHERE");
+			sql.append(" user_id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, status);
+			ps.setInt(2, userId);
+
+			int count = ps.executeUpdate();
+			if (count == 0) {
+				throw new NoRowsUpdatedRuntimeException();
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
 	public List<User> getAllUserList(Connection connection) {
 
 		PreparedStatement ps = null;

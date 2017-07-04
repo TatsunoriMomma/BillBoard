@@ -37,14 +37,26 @@
 			</c:forEach>
 			</div>
 
-			<div class="is_working"><c:out value="${user.is_working}" /></div>
+
 			<div class="edit">
 			<form action="edit" method="get">
 			<input type="hidden" name="editUserId" id="editUserId" value="${user.user_id}" /><br />
 			<input type="submit" value="編集" /> <br />
 			</form>
 			</div>
-			<div class="edit"><button type="submit" >停止</button></div>
+
+			<div class="is_working">
+			<form action="isWorking" method="post">
+			<input type="hidden" name="editUserId" id="editUserId" value="${user.user_id}" />
+			<c:if test="${user.is_working == 0 }" >
+				<input type="submit" value="停止" /> <br />
+			</c:if>
+			<c:if test="${user.is_working == 1 }" >
+				<input type="submit" value="復活" /> <br />
+			</c:if>
+			</form>
+			</div>
+
 			<div class="edit"><button type="submit" >削除</button></div>
 		</div>
 	</c:forEach>

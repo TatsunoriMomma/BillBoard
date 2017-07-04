@@ -43,8 +43,8 @@
 							<div class="insert_date">投稿日時:<fmt:formatDate value="${comment.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 						</c:if>
 					</div>
-					<br>
 				</c:forEach>
+				<br>
 			</form>
 		</div>
 		<br>
