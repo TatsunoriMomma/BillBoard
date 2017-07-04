@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import BillBoard.beans.Comment;
-import BillBoard.beans.Contribution;
-import BillBoard.service.CommentService;
-import BillBoard.service.ContributionService;
+import BillBoard.beans.UserComment;
+import BillBoard.beans.UserContribution;
+import BillBoard.service.UserCommentService;
+import BillBoard.service.UserContributionService;
 
 @WebServlet(urlPatterns = { "/index.jsp"})
 public class TopServlet extends HttpServlet {
@@ -22,13 +22,15 @@ public class TopServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
-		List<Contribution> contributions = new ArrayList<Contribution>();
-		List<Comment> comments = new ArrayList<Comment>();
+		List<UserContribution> contributions = new ArrayList<UserContribution>();
+		List<UserComment> comments = new ArrayList<UserComment>();
 
-		ContributionService contributionService = new ContributionService();
-		contributions = contributionService.getAllContribution();
-		CommentService commentService = new CommentService();
-		comments = commentService.getAllComment();
+		UserContributionService userContributionService = new UserContributionService();
+		contributions = userContributionService.getAllUserContribution();
+
+		UserCommentService userCommentService = new UserCommentService();
+		comments = userCommentService.getAllUserComment();
+
 		request.setAttribute("contributions", contributions);
 		request.setAttribute("comments", comments);
 

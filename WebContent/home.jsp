@@ -28,7 +28,7 @@
 			<div class="subject">件名:<c:out value="${contribution.subject}"/></div>
 			<div class="text"><c:out value="${contribution.text}"/></div>
 			<div class="category">カテゴリー:<c:out value="${contribution.category}" /></div>
-			<div class="user_id">名前:<c:out value="${contribution.user_id}" /></div>
+			<div class="user_id">名前:<c:out value="${contribution.name}" /></div>
 			<div class="insert_date">投稿日時:<fmt:formatDate value="${contribution.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 			<form action="comment" method="post"><br />
 				<label for="text"></label>
@@ -38,7 +38,7 @@
 				<c:forEach items="${comments}" var="comment">
 					<div class="comment">
 						<c:if test="${contribution.id == comment.contribution_id}" >
-							<div class="name">名前<c:out value="${comment.user_id}" /></div>
+							<div class="name">名前:<c:out value="${comment.name}" /></div>
 							<div class="text"><c:out value="${comment.text}" /></div>
 							<div class="insert_date">投稿日時:<fmt:formatDate value="${comment.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 						</c:if>
