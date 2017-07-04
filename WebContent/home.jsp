@@ -33,18 +33,17 @@
 			<form action="comment" method="post"><br />
 				<label for="text"></label>
 				<input name="text" id="text" /><br />
-				<input type="hidden" name="contributionId" id="contribution" value="${contribution.contribution_id}" /><br />
+				<input type="hidden" name="contributionId" id="contributionId" value="${contribution.id}" /><br />
 				<input type="submit" value="コメントする" /><br />
 				<c:forEach items="${comments}" var="comment">
 					<div class="comment">
-						<c:if test="${contribution.contribution_id == comment.contribution_id}" >
+						<c:if test="${contribution.id == comment.contribution_id}" >
 							<div class="name">名前<c:out value="${comment.user_id}" /></div>
 							<div class="text"><c:out value="${comment.text}" /></div>
 							<div class="insert_date">投稿日時:<fmt:formatDate value="${comment.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 						</c:if>
 					</div>
 				</c:forEach>
-				<br>
 			</form>
 		</div>
 		<br>

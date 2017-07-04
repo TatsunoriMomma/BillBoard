@@ -44,7 +44,7 @@ public class UserDao {
 		List<User> ret = new ArrayList<User>();
 		try {
 			while(rs.next()) {
-				int user_id = rs.getInt("user_id");
+				int user_id = rs.getInt("id");
 				String login_id = rs.getString("login_id");
 				String password = rs.getString("password");
 				String name = rs.getString("name");
@@ -53,7 +53,7 @@ public class UserDao {
 				int is_working = rs.getInt("is_working");
 
 				User user = new User();
-				user.setUser_id(user_id);
+				user.setId(user_id);
 				user.setLogin_id(login_id);
 				user.setPassword(password);
 				user.setName(name);
@@ -122,7 +122,7 @@ public class UserDao {
 				sql.append(", password = ?");
 			}
 			sql.append(" WHERE");
-			sql.append(" user_id = ?");
+			sql.append(" id = ?");
 
 			ps = connection.prepareStatement(sql.toString());
 
@@ -132,11 +132,11 @@ public class UserDao {
 			ps.setInt(4, user.getDepartment_id());
 
 			if(user.getPassword() == null){
-				ps.setInt(5, user.getUser_id());
+				ps.setInt(5, user.getId());
 			}
 			else{
 				ps.setString(5, user.getPassword());
-				ps.setInt(6, user.getUser_id());
+				ps.setInt(6, user.getId());
 			}
 
 
@@ -160,7 +160,7 @@ public class UserDao {
 			sql.append("  is_working = ?");
 			sql.append(", update_date = CURRENT_TIMESTAMP");
 			sql.append(" WHERE");
-			sql.append(" user_id = ?");
+			sql.append(" id = ?");
 
 			ps = connection.prepareStatement(sql.toString());
 
@@ -204,7 +204,7 @@ public class UserDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM users WHERE user_id = ?";
+			String sql = "SELECT * FROM users WHERE id = ?";
 
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, user_id);

@@ -17,22 +17,22 @@
 	<c:forEach items="${users}" var="user">
 		<div class="user">
 			<div class="user-name">
-				<span class="name"><c:out value="${user.name}" /></span>
+				<span class="name">名前:<c:out value="${user.name}" /></span>
 			</div>
-			<div class="login_id"><c:out value="${user.login_id}" /></div>
+			<div class="login_id">ログインID:<c:out value="${user.login_id}" /></div>
 
 			<div class="branch">
 			<c:forEach items="${branches}" var="branch">
-				<c:if test="${user.branch_id == branch.branch_id}" >
-				<c:out value="${branch.name}" />
+				<c:if test="${user.branch_id == branch.id}" >
+				支店:<c:out value="${branch.name}" />
 				</c:if>
 			</c:forEach>
 			</div>
 
 			<div class="department">
 			<c:forEach items="${departments}" var="department">
-				<c:if test="${user.department_id == department.department_id}" >
-				<c:out value="${department.name}" />
+				<c:if test="${user.department_id == department.id}" >
+				部署:<c:out value="${department.name}" />
 				</c:if>
 			</c:forEach>
 			</div>
@@ -40,14 +40,14 @@
 
 			<div class="edit">
 			<form action="edit" method="get">
-			<input type="hidden" name="editUserId" id="editUserId" value="${user.user_id}" /><br />
+			<input type="hidden" name="editUserId" id="editUserId" value="${user.id}" /><br />
 			<input type="submit" value="編集" /> <br />
 			</form>
 			</div>
 
 			<div class="is_working">
 			<form action="isWorking" method="post">
-			<input type="hidden" name="editUserId" id="editUserId" value="${user.user_id}" />
+			<input type="hidden" name="editUserId" id="editUserId" value="${user.id}" />
 			<c:if test="${user.is_working == 0 }" >
 				<input type="submit" value="停止" /> <br />
 			</c:if>

@@ -26,7 +26,7 @@
 
 <form action="edit" method="post" ><br />
 	<label for="editName">${editUser.name}さんの編集</label><br />
-	<input type="hidden" name="userId" id="userId" value="${editUser.user_id}" /><br />
+	<input type="hidden" name="userId" id="userId" value="${editUser.id}" /><br />
 
 	<label for="loginId">ログインID</label>
 	<input name="loginId" value="${editUser.login_id}" /><br />
@@ -43,8 +43,8 @@
 	<label for="branchId">支店</label>
 	<select name="branchId" id="branchId">
 	<c:forEach items="${branches}" var="branch">
-		<option value="${branch.branch_id}"
-		<c:if test="${editUser.branch_id == branch.branch_id}" >selected</c:if>
+		<option value="${branch.id}"
+		<c:if test="${editUser.branch_id == branch.id}" >selected</c:if>
 		>
 		<c:out value="${branch.name}" />
 		</option>
@@ -54,8 +54,8 @@
 	<label for="departmentId">部署</label>
 	<select name="departmentId" id="departmentId">
 	<c:forEach items="${departments}" var="department">
-		<option value="${department.department_id}"
-		<c:if test="${editUser.department_id == department.department_id}" >selected</c:if>
+		<option value="${department.id}"
+		<c:if test="${editUser.department_id == department.id}" >selected</c:if>
 		>
 		<c:out value="${department.name}" />
 		</option>
