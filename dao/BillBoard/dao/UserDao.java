@@ -221,14 +221,39 @@ public class UserDao {
 	}
 
 
-	public User getUser(Connection connection, int user_id) {
+	public User getUser(Connection connection, int userId) {
 
 		PreparedStatement ps = null;
 		try {
 			String sql = "SELECT * FROM users WHERE id = ?";
 
 			ps = connection.prepareStatement(sql);
-			ps.setInt(1, user_id);
+			ps.setInt(1, userId);
+
+			ResultSet rs = ps.executeQuery();
+			List<User> userList = toUserList(rs);
+			if (userList.isEmpty() == true) {
+				return null;
+			} else if (2 <= userList.size()) {
+				throw new IllegalStateException("2 <= userList.size()");
+			} else {
+				return userList.get(0);
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	public User checkUserExistance(Connection connection, String loginId) {
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM users WHERE login_id = ?";
+
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, loginId);
 
 			ResultSet rs = ps.executeQuery();
 			List<User> userList = toUserList(rs);

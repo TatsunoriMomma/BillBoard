@@ -26,7 +26,7 @@
 
 <form action="edit" method="post" ><br />
 	<label for="editName">${editUser.name}さんの編集</label><br />
-	<input type="hidden" name="userId" id="userId" value="${editUser.id}" /><br />
+	<input type="hidden" name="id" id="id" value="${editUser.id}" /><br />
 
 	<label for="loginId">ログインID</label>
 	<input name="loginId" value="${editUser.login_id}" /><br />

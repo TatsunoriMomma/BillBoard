@@ -104,14 +104,14 @@ public class UserService {
 		}
 	}
 
-	public User getUser(int loginId) {
+	public User getUser(int userId) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserDao userDao = new UserDao();
-			User user = userDao.getUser(connection, loginId);
+			User user = userDao.getUser(connection, userId);
 
 			commit(connection);
 
@@ -137,6 +137,29 @@ public class UserService {
 			userDao.isWorkingSwitch(connection, userId, status);
 
 			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	public User checkUserExistance(String loginId) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserDao userDao = new UserDao();
+			User user = userDao.checkUserExistance(connection, loginId);
+
+			commit(connection);
+
+			return user;
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;

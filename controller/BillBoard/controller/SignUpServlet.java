@@ -46,6 +46,7 @@ public class SignUpServlet extends HttpServlet {
 
 
 		HttpSession session = request.getSession();
+
 		User user = new User();
 		user.setLogin_id(request.getParameter("loginId"));
 		user.setName(request.getParameter("name"));
@@ -78,6 +79,8 @@ public class SignUpServlet extends HttpServlet {
 		int branch = Integer.parseInt(request.getParameter("branchId"));
 		int department = Integer.parseInt(request.getParameter("departmentId"));
 
+		User checkExistUser = new UserService().checkUserExistance(loginId);
+
 		if (StringUtils.isBlank(loginId) == true) {
 			messages.add("ログインIDを入力してください");
 		} else if (!loginId.matches("\\w*") == true){
@@ -85,9 +88,9 @@ public class SignUpServlet extends HttpServlet {
 		} else if (loginId.length() < 6 || loginId.length() > 20){
 				messages.add("ログインIDの桁数に誤りがあります");
 		}
-		//else if (isLoginId != null && isLoginId.getId() != id ){
-		//	messages.add("指定されたログインIDは既に使用されています");
-		//}
+		if (checkExistUser != null){
+			messages.add("指定されたログインIDは既に使用されています");
+		}
 		if (password.length() < 6 || password.length() > 255){
 			messages.add("パスワードの桁数に誤りがあります");
 		}
