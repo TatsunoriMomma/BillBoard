@@ -32,8 +32,10 @@
 
 	<label for="category">カテゴリー</label>
 	<select name="category" id="category">
-	<option value="カテゴリー１">カテゴリー1</option>
-	<option value=2>カテゴリー2</option>
+	<c:forEach items="${categories}" var="category">
+	<option value="${category}"><c:out value="${category}" />
+	</option>
+	</c:forEach>
 	</select> <br />
 
 	<input type="submit" value="登録" /> <br />

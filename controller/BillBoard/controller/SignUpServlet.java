@@ -74,6 +74,7 @@ public class SignUpServlet extends HttpServlet {
 		String loginId = request.getParameter("loginId");
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
+		String checkPassword = request.getParameter("checkPassword");
 		int branch = Integer.parseInt(request.getParameter("branchId"));
 		int department = Integer.parseInt(request.getParameter("departmentId"));
 
@@ -84,18 +85,15 @@ public class SignUpServlet extends HttpServlet {
 		} else if (loginId.length() < 6 || loginId.length() > 20){
 				messages.add("ログインIDの桁数に誤りがあります");
 		}
-
 		//else if (isLoginId != null && isLoginId.getId() != id ){
 		//	messages.add("指定されたログインIDは既に使用されています");
 		//}
-
 		if (password.length() < 6 || password.length() > 255){
 			messages.add("パスワードの桁数に誤りがあります");
 		}
-		//else if (!passwordConfirmation.equals(password)){
-		//messages.add("パスワード（確認用）が正しくありません");
-		//}
-
+		if (!checkPassword.equals(password)){
+		messages.add("パスワード（確認用）が正しくありません");
+		}
 		if(StringUtils.isBlank(name) == true){
 			messages.add("名前を入力してください");
 		}
@@ -104,6 +102,12 @@ public class SignUpServlet extends HttpServlet {
 		}
 		if(department == 0){
 			messages.add("部署を選択してください");
+		}
+		if(branch != 1 && department <= 2){
+			messages.add("支店と部署の組み合わせが正しくありません");
+		}
+		if(branch == 1 && department > 2){
+			messages.add("支店と部署の組み合わせが正しくありません");
 		}
 		if (messages.size() == 0) {
 			return true;

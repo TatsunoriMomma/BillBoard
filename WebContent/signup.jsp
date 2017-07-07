@@ -31,10 +31,10 @@
 	<input name="name" id="name" value="${user.name}"/>10文字以下<br />
 
 	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password"/>6文字以上20字以下<br />
+	<input name="password" type="password" id="password"/>半角英数記号6文字以上20字以下<br />
 
 	<label for="checkPassword">パスワード(確認用)</label>
-	<input name="checkPassword" id="checkPassword"/> <br />
+	<input name="checkPassword" type="password" id="checkPassword"/> <br />
 
 	<label for="branchId">支店</label>
 	<select name="branchId" id="branchId">

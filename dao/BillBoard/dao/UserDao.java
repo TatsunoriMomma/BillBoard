@@ -152,6 +152,27 @@ public class UserDao {
 
 	}
 
+	public void delete(Connection connection, int id) {
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE FROM users WHERE id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, id);
+
+			int count = ps.executeUpdate();
+			if (count == 0) {
+				throw new NoRowsUpdatedRuntimeException();
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
 	public void isWorkingSwitch(Connection connection, int userId, int status) {
 		PreparedStatement ps = null;
 		try {

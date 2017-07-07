@@ -83,6 +83,26 @@ public class UserService {
 			close(connection);
 		}
 	}
+	public void delete(int id) {
+
+		Connection connection = null;
+		try{
+			connection = getConnection();
+
+			UserDao userDao = new UserDao();
+			userDao.delete(connection, id);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 
 	public User getUser(int loginId) {
 

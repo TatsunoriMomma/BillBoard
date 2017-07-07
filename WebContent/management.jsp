@@ -40,24 +40,33 @@
 
 			<div class="edit">
 			<form action="edit" method="get">
-			<input type="hidden" name="editUserId" id="editUserId" value="${user.id}" /><br />
-			<input type="submit" value="編集" /> <br />
+			<input type="hidden" name="editUserId" id="editUserId" value="${user.id}" />
+			<input type="submit" value="編集" />
 			</form>
 			</div>
 
 			<div class="is_working">
 			<form action="isWorking" method="post">
 			<input type="hidden" name="editUserId" id="editUserId" value="${user.id}" />
-			<c:if test="${user.is_working == 0 }" >
-				<input type="submit" value="停止" /> <br />
-			</c:if>
-			<c:if test="${user.is_working == 1 }" >
-				<input type="submit" value="復活" /> <br />
+			<c:if test="${loginUser.id != user.id}">
+				<c:if test="${user.is_working == 0 }" >
+					<input type="submit" value="停止" />
+				</c:if>
+				<c:if test="${user.is_working == 1 }" >
+					<input type="submit" value="復活" />
+				</c:if>
 			</c:if>
 			</form>
 			</div>
 
-			<div class="edit"><button type="submit" >削除</button></div>
+			<div class="delete">
+			<form action="deleteUser" method="post">
+			<c:if test="${loginUser.id != user.id }">
+				<input type="hidden" name="editUserId" id="editUserId" value="${user.id}" />
+				<input type="submit" value="削除" />
+			</c:if>
+			</form>
+			</div>
 		</div>
 	</c:forEach>
 </div>

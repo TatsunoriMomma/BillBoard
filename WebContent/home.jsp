@@ -11,7 +11,18 @@
 	<link href="./css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+
 <div class="main-contents">
+<c:if test="${ not empty errorMessages }">
+	<div class="errorMessages">
+		<ul>
+			<c:forEach items="${errorMessages}" var="message">
+				<li><c:out value="${message}" />
+			</c:forEach>
+		</ul>
+	</div>
+	<c:remove var="errorMessages" scope="session"/>
+</c:if>
 
 <a href="contribution">新規投稿</a>
 <a href="management">ユーザー管理</a>
@@ -36,9 +47,14 @@
 				<input type="hidden" name="contributionId" id="contributionId" value="${contribution.id}" />
 				<input type="submit" value="コメントする" />
 			</form>
-			<form action="contributionDelete" method="post">
+			<form action="deleteContribution" method="post">
 				<input type="hidden" name="contributionId" id="contributionId" value="${contribution.id}" />
-				<input type="submit" value="投稿削除" />
+				<c:choose>
+					<c:when test="${contribution.user_id == loginUser.id}" ><input type="submit" value="投稿削除" /></c:when>
+					<c:when test="${loginUser.department_id == 2}" ><input type="submit" value="投稿削除" /></c:when>
+					<c:when test="${loginUser.department_id == 3} && ${loginUser.branch_id == contribution.branch_id}" ><input type="submit" value="投稿削除" /></c:when>
+					<c:when test="${loginUser.department_id == 4} && ${loginUser.branch_id == contribution.branch_id}" ><input type="submit" value="投稿削除" /></c:when>
+				</c:choose>
 			</form>
 
 			<c:forEach items="${comments}" var="comment">
@@ -49,7 +65,12 @@
 						<div class="insert_date">投稿日時:<fmt:formatDate value="${comment.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 						<form action="commentDelete" method="post">
 							<input type="hidden" name="commentId" id="commentId" value="${comment.id}" />
-							<input type="submit" value="コメント削除" />
+								<c:choose>
+									<c:when test="${comment.user_id == loginUser.id}" ><input type="submit" value="コメント削除" /></c:when>
+									<c:when test="${loginUser.department_id == 2}" ><input type="submit" value="コメント削除" /></c:when>
+									<c:when test="${loginUser.department_id == 3} && ${loginUser.branch_id == comment.branch_id}" ><input type="submit" value="コメント削除" /></c:when>
+									<c:when test="${loginUser.department_id == 4} && ${loginUser.branch_id == comment.branch_id}" ><input type="submit" value="コメント削除" /></c:when>
+								</c:choose>
 						</form>
 					</c:if>
 				</div>
