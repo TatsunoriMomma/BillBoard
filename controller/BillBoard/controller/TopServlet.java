@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import BillBoard.beans.UserComment;
 import BillBoard.beans.UserContribution;
+import BillBoard.service.ContributionService;
 import BillBoard.service.UserCommentService;
 import BillBoard.service.UserContributionService;
 
@@ -24,6 +25,7 @@ public class TopServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 		List<UserContribution> contributions = new ArrayList<UserContribution>();
 		List<UserComment> comments = new ArrayList<UserComment>();
+		List<String> categories = new ArrayList<String>();
 
 		UserContributionService userContributionService = new UserContributionService();
 		contributions = userContributionService.getAllUserContribution();
@@ -31,8 +33,12 @@ public class TopServlet extends HttpServlet {
 		UserCommentService userCommentService = new UserCommentService();
 		comments = userCommentService.getAllUserComment();
 
+		ContributionService contributionService = new ContributionService();
+		categories = contributionService.getAllCategory();
+
 		request.setAttribute("contributions", contributions);
 		request.setAttribute("comments", comments);
+		request.setAttribute("categories", categories);
 
 		request.getRequestDispatcher("/home.jsp").forward(request,response);
 	}

@@ -27,12 +27,27 @@
 <a href="contribution">新規投稿</a>
 <a href="management">ユーザー管理</a>
 <a href="logout">ログアウト</a>
-<c:if test="${not empty loginUser }">
-	<div class="profile">
-		<div class="name"><h2><c:out value="${loginUser.name}"/></h2>
+<div class="profile">
+	<div class="name"><h2><c:out value="${loginUser.name}"/></h2></div>
 </div>
+<form action="narrow" method="post">
+	<div class="narrow">
+	<div class="narrowCategory">
+	<label for="narrowCategory">カテゴリー</label>
+		<select name="narrowCategory" id="narrowCategory">
+		<c:forEach items="${categories}" var="category">
+		<option value="${category}"><c:out value="${category}" /></option>
+		</c:forEach>
+		</select> <br />
 	</div>
-</c:if>
+	<div class="narrowDate">
+	<label for="narrowDate">日付</label>
+
+	</div>
+	</div>
+	<input type="submit" value="絞り込む" /><br />
+</form>
+
 <div class="contributions">
 	<c:forEach items="${contributions}" var="contribution">
 		<div class="contribution">

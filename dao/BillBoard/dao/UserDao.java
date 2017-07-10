@@ -185,8 +185,14 @@ public class UserDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setInt(1, status);
-			ps.setInt(2, userId);
+			if(status == 0){
+				ps.setInt(1, 1);
+				ps.setInt(2, userId);
+			}
+			if(status == 1){
+				ps.setInt(1, 0);
+				ps.setInt(2, userId);
+			}
 
 			int count = ps.executeUpdate();
 			if (count == 0) {
