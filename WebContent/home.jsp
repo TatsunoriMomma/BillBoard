@@ -30,8 +30,8 @@
 <div class="profile">
 	<div class="name"><h2><c:out value="${loginUser.name}"/></h2></div>
 </div>
-<form action="narrow" method="post">
-	<div class="narrow">
+<div class="narrow">
+<form action="narrow" method="get">
 	<div class="narrowCategory">
 	<label for="narrowCategory">カテゴリー</label>
 		<select name="narrowCategory" id="narrowCategory">
@@ -44,9 +44,12 @@
 	<label for="narrowDate">日付</label>
 
 	</div>
-	</div>
-	<input type="submit" value="絞り込む" /><br />
+	<input type="submit" value="絞り込む" />
 </form>
+<form action="./" method="get">
+<input type="submit" value="リセット" />
+</form>
+</div>
 
 <div class="contributions">
 	<c:forEach items="${contributions}" var="contribution">

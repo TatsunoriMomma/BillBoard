@@ -1,6 +1,8 @@
 package BillBoard.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang.StringUtils;
 
 import BillBoard.beans.Comment;
 import BillBoard.beans.User;
@@ -26,6 +30,7 @@ public class CommentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
+		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();
 		Comment comment = new Comment();
 		User user = new User();
@@ -34,9 +39,25 @@ public class CommentServlet extends HttpServlet {
 		comment.setUser_id(user.getId());
 		comment.setContribution_id(Integer.parseInt(request.getParameter("contributionId")));
 
-		new CommentService().register(comment);
-		response.sendRedirect("./");
+		if(isValid(request,messages) == true){
+			new CommentService().register(comment);
+			response.sendRedirect("./");
+		} else {
+			session.setAttribute("errorMessages", messages);
+			response.sendRedirect("./");
+		}
+	}
+	private boolean isValid(HttpServletRequest request, List<String> messages) {
+		String text = request.getParameter("text");
 
+		if (StringUtils.isEmpty(text) == true) {
+			messages.add("本文を入力してください");
+		}
+		if (messages.size() == 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

@@ -53,7 +53,7 @@ public class ContributionServlet extends HttpServlet {
 		contribution.setCategory(request.getParameter("category"));
 		contribution.setUser_id(user.getId());
 
-		if (isValid(request, messages) == true) {
+		if(isValid(request, messages) == true) {
 
 			new ContributionService().register(contribution);
 

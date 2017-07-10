@@ -81,15 +81,15 @@ public class UserContributionDao {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-					sql.append("SELECT contributions.* ,");
-					sql.append(" users.id AS users_id, users.name");
-					sql.append(", users.branch_id, users.department_id");
-					sql.append(" FROM contributions LEFT OUTER JOIN users");
-					sql.append(" ON contributions.user_id = users.id");
-					sql.append(" ORDER BY insert_date DESC");
+			sql.append("SELECT contributions.* ,");
+			sql.append(" users.id AS users_id, users.name");
+			sql.append(", users.branch_id, users.department_id");
+			sql.append(" FROM contributions LEFT OUTER JOIN users");
+			sql.append(" ON contributions.user_id = users.id");
 			if(category != null){
 				sql.append(" WHERE category = ? ");
 			}
+			sql.append(" ORDER BY insert_date DESC");
 			ps = connection.prepareStatement(sql.toString());
 
 			if(category != null){
