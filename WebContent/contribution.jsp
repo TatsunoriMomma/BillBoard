@@ -25,15 +25,18 @@
 
 <form action="contribution" method="post"><br />
 	<label for="subject">件名</label>
-	<input name="subject" id="subject" /><br />
+	<input name="subject" id="subject" value="${contribution.subject}" /><br />
 
 	<label for="text">本文</label>
-	<input name="text" id="text"/><br />
+	<input name="text" id="text" value="${contribution.text}" /><br />
 
 	<label for="category">カテゴリー</label>
 	<select name="category" id="category">
 	<c:forEach items="${categories}" var="category">
-	<option value="${category}"><c:out value="${category}" />
+	<option value="${category}"
+	<c:if test="${contribution.category == category}">selected</c:if>
+	>
+	<c:out value="${category}" />
 	</option>
 	</c:forEach>
 	</select> <br />

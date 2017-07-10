@@ -52,8 +52,9 @@
 				<c:choose>
 					<c:when test="${contribution.user_id == loginUser.id}" ><input type="submit" value="投稿削除" /></c:when>
 					<c:when test="${loginUser.department_id == 2}" ><input type="submit" value="投稿削除" /></c:when>
-					<c:when test="${loginUser.department_id == 3} && ${loginUser.branch_id == contribution.branch_id}" ><input type="submit" value="投稿削除" /></c:when>
-					<c:when test="${loginUser.department_id == 4} && ${loginUser.branch_id == contribution.branch_id}" ><input type="submit" value="投稿削除" /></c:when>
+					<c:when test="${loginUser.department_id == 3 && contribution.department_id == 4 && loginUser.branch_id == contribution.branch_id}" >
+					<input type="submit" value="投稿削除" />
+					</c:when>
 				</c:choose>
 			</form>
 
@@ -68,8 +69,9 @@
 								<c:choose>
 									<c:when test="${comment.user_id == loginUser.id}" ><input type="submit" value="コメント削除" /></c:when>
 									<c:when test="${loginUser.department_id == 2}" ><input type="submit" value="コメント削除" /></c:when>
-									<c:when test="${loginUser.department_id == 3} && ${loginUser.branch_id == comment.branch_id}" ><input type="submit" value="コメント削除" /></c:when>
-									<c:when test="${loginUser.department_id == 4} && ${loginUser.branch_id == comment.branch_id}" ><input type="submit" value="コメント削除" /></c:when>
+									<c:when test="${loginUser.department_id == 3 && comment.department_id == 4 && loginUser.branch_id == comment.branch_id}" >
+									<input type="submit" value="コメント削除" />
+									</c:when>
 								</c:choose>
 						</form>
 					</c:if>
