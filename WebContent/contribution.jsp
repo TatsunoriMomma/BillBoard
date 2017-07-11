@@ -25,10 +25,10 @@
 
 <form action="contribution" method="post"><br />
 	<label for="subject">件名</label>
-	<input name="subject" id="subject" value="${contribution.subject}" /><br />
+	<input name="subject" id="subject" value="${contribution.subject}" />30文字以下<br />
 
 	<label for="text">本文</label>
-	<input name="text" id="text" value="${contribution.text}" /><br />
+	<input name="text" id="text" value="${contribution.text}" />1000文字以下<br />
 
 	<label for="category">カテゴリー</label>
 	<select name="category" id="category">

@@ -34,14 +34,14 @@ public class UserContributionService {
 		}
 	}
 
-	public List<UserContribution> getNarrowUserContribution(String category) {
+	public List<UserContribution> getNarrowUserContribution(String category ,String firstDate, String lastDate) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserContributionDao usercontributionDao = new UserContributionDao();
-			List<UserContribution> ret = usercontributionDao.getNarrowUserContribution(connection, category);
+			List<UserContribution> ret = usercontributionDao.getNarrowUserContribution(connection, category, firstDate, lastDate);
 
 			commit(connection);
 

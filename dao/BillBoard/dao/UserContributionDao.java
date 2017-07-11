@@ -76,7 +76,7 @@ public class UserContributionDao {
 		}
 	}
 
-	public List<UserContribution> getNarrowUserContribution(Connection connection, String category) {
+	public List<UserContribution> getNarrowUserContribution(Connection connection, String category, String firstDate, String lastDate) {
 
 		PreparedStatement ps = null;
 		try {
@@ -86,15 +86,34 @@ public class UserContributionDao {
 			sql.append(", users.branch_id, users.department_id");
 			sql.append(" FROM contributions LEFT OUTER JOIN users");
 			sql.append(" ON contributions.user_id = users.id");
-			if(category != null){
-				sql.append(" WHERE category = ? ");
+
+			//要変更
+			if(firstDate.isEmpty()){
+				firstDate = "2017/06/01";
+			}
+			if(lastDate.isEmpty()){
+				lastDate = "2017/07/30";
+			} else {
+				lastDate += " 23:59:59";
+			}
+			sql.append(" WHERE contributions.insert_date BETWEEN ? AND ?");
+			if(!category.isEmpty()){
+				sql.append(" AND category = ? ");
 			}
 			sql.append(" ORDER BY insert_date DESC");
 			ps = connection.prepareStatement(sql.toString());
 
-			if(category != null){
-				ps.setString(1, category);
-			}
+			if(!category.isEmpty()){
+				ps.setString(1, firstDate);
+				ps.setString(2, lastDate);
+				ps.setString(3, category);
+			} else {
+				ps.setString(1, firstDate);
+				ps.setString(2, lastDate);}
+			System.out.println(firstDate);
+			System.out.println(lastDate);
+			System.out.println(ps);
+
 			ResultSet rs = ps.executeQuery();
 			List<UserContribution> contributionList = toContributionList(rs);
 			if (contributionList.isEmpty() == true) {

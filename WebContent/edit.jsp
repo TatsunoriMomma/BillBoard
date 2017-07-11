@@ -29,13 +29,13 @@
 	<input type="hidden" name="id" id="id" value="${editUser.id}" /><br />
 
 	<label for="loginId">ログインID</label>
-	<input name="loginId" value="${editUser.login_id}" /><br />
+	<input name="loginId" value="${editUser.login_id}" />半角英数6文字以上20字以下<br />
 
 	<label for="name">名前</label>
-	<input name="name" value="${editUser.name}" id="name"/><br />
+	<input name="name" value="${editUser.name}" id="name"/>10文字以下<br />
 
 	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password" /> <br />
+	<input name="password" type="password" id="password" />半角英数記号6文字以上20字以下<br />
 
 	<label for="checkPassword">パスワード（確認用）</label>
 	<input name="checkPassword" type="password" id="checkPassword"/> <br />

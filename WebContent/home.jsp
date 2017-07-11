@@ -17,9 +17,22 @@
 
 	<script>
 	$(function() {
-	    $('.calendar').datepicker();
+
+	    $('#firstCalendar').datepicker({
+			maxDate : "0y"
+	    });
+
+		$('#firstCalendar').change(function() {
+			$('#lastCalendar').datepicker("option","minDate",$('#firstCalendar').val())
+		})
+
+	    $('#lastCalendar').datepicker({
+			maxDate : "0y"
+	    });
 	});
 	</script>
+
+
 
 </head>
 <body>
@@ -47,6 +60,7 @@
 	<div class="narrowCategory">
 	<label for="narrowCategory">カテゴリー</label>
 		<select name="narrowCategory" id="narrowCategory">
+		<option value=""><c:out value="選択してください" />
 		<c:forEach items="${categories}" var="category">
 		<option value="${category}"><c:out value="${category}" /></option>
 		</c:forEach>
@@ -54,9 +68,9 @@
 	</div>
 	<div class="narrowDate">
 	<label for="narrowFirstDate">開始日</label>
-	<input name="narrowFirstDate" class="calendar" type="text">
+	<input name="narrowFirstDate" id="firstCalendar" type="text" readonly>
 	<label for="narrowLastDate">終了日</label>
-	<input name="narrowLastDate" class="calendar" type="text">
+	<input name="narrowLastDate" id="lastCalendar" type="text" readonly>
 	</div>
 	<input type="submit" value="絞り込む" />
 </form>

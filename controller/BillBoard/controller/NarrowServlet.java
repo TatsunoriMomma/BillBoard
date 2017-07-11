@@ -28,9 +28,11 @@ public class NarrowServlet extends HttpServlet {
 		List<String> categories = new ArrayList<String>();
 
 		String category = request.getParameter("narrowCategory");
+		String firstDate = request.getParameter("narrowFirstDate");
+		String lastDate = request.getParameter("narrowLastDate");
 
 		UserContributionService userContributionService = new UserContributionService();
-		contributions = userContributionService.getNarrowUserContribution(category);
+		contributions = userContributionService.getNarrowUserContribution(category, firstDate, lastDate);
 
 		UserCommentService userCommentService = new UserCommentService();
 		comments = userCommentService.getAllUserComment();
@@ -38,8 +40,6 @@ public class NarrowServlet extends HttpServlet {
 		ContributionService contributionService = new ContributionService();
 		categories = contributionService.getAllCategory();
 
-		System.out.println(request.getParameter("narrowFirstDate"));
-		System.out.println(request.getParameter("narrowLastDate"));
 		request.setAttribute("contributions", contributions);
 		request.setAttribute("comments", comments);
 		request.setAttribute("categories", categories);

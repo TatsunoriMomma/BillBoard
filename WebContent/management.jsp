@@ -6,9 +6,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <title>ユーザー管理</title>
 
+<script type="text/javascript">
+	function dialog(){
+		if(window.confirm("本当によろしいですか？")){
+		//location.href = "./manage" ;
+		return true;
+		}
+	else{
+	}
+	window.alert("キャンセルしました")
+	return false;
+	}
+	</script>
 
 </head>
 <body>
@@ -49,7 +60,7 @@
 			</div>
 
 			<div class="is_working">
-			<form action="isWorking" method="post">
+			<form action="isWorking" method="post" onsubmit="return dialog()">
 			<input type="hidden" name="editUserId" id="editUserId" value="${user.id}" />
 			<c:if test="${loginUser.id != user.id}">
 				<c:if test="${user.is_working == 0 }" >
@@ -63,10 +74,10 @@
 			</div>
 
 			<div class="delete">
-			<form action="deleteUser" method="post">
+			<form action="deleteUser" method="post" onsubmit="return dialog()" >
 			<c:if test="${loginUser.id != user.id }">
 				<input type="hidden" name="editUserId" id="editUserId" value="${user.id}" />
-				<input type="submit" value="削除" />
+				<input type="submit" id="delete" value="削除" />
 			</c:if>
 			</form>
 			</div>
