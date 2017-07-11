@@ -44,7 +44,6 @@ public class LoginFilter implements Filter{
 						((HttpServletResponse)response).sendRedirect(loginURI);
 						return;
 					}
-
 				}
 			}
 			//System.out.println("LoginFilterが実行されました。");
