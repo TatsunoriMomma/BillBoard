@@ -8,7 +8,19 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ホーム</title>
+
 	<link href="./css/style.css" rel="stylesheet" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/blitzer/jquery-ui.css" >
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+
+	<script>
+	$(function() {
+	    $('.calendar').datepicker();
+	});
+	</script>
+
 </head>
 <body>
 
@@ -41,8 +53,10 @@
 		</select> <br />
 	</div>
 	<div class="narrowDate">
-	<label for="narrowDate">日付</label>
-
+	<label for="narrowFirstDate">開始日</label>
+	<input name="narrowFirstDate" class="calendar" type="text">
+	<label for="narrowLastDate">終了日</label>
+	<input name="narrowLastDate" class="calendar" type="text">
 	</div>
 	<input type="submit" value="絞り込む" />
 </form>
