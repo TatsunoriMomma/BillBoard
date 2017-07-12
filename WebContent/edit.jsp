@@ -7,12 +7,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ユーザー編集</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet" type="text/css">
+<link href="./css/main.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
+
+<div class="main-contents">
 <a href="./">ホーム</a>
 <a href="logout">ログアウト</a>
-<div class="main-contents">
-
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>

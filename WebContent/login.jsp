@@ -7,10 +7,13 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ログイン</title>
-	<link href="./css/style.css" rel="stylesheet" type="text/css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet" type="text/css">
+	<link href="./css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+
 <div class="main-contents">
+
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -24,7 +27,7 @@
 
 <form action="login" method="post"><br />
 	<label for="loginId">ログインID</label>
-	<input name="loginId" value="${loginId}" id="loginId"/> <br />
+	<input type="text" name="loginId" value="${loginId}" id="loginId"/> <br />
 
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/> <br />

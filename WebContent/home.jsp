@@ -9,7 +9,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ホーム</title>
 
-	<link href="./css/style.css" rel="stylesheet" type="text/css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet" type="text/css">
+	<link href="./css/main.css" rel="stylesheet" type="text/css">
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/blitzer/jquery-ui.css" >
@@ -38,6 +40,11 @@
 <body>
 
 <div class="main-contents">
+
+<a href="contribution">新規投稿</a>
+<a href="management">ユーザー管理</a>
+<a href="logout">ログアウト</a>
+
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -49,34 +56,43 @@
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 
-<a href="contribution">新規投稿</a>
-<a href="management">ユーザー管理</a>
-<a href="logout">ログアウト</a>
+
 <div class="profile">
 	<div class="name"><h2><c:out value="${loginUser.name}"/></h2></div>
 </div>
-<div class="narrow">
-<form action="narrow" method="get">
-	<div class="narrowCategory">
-	<label for="narrowCategory">カテゴリー</label>
-		<select name="narrowCategory" id="narrowCategory">
-		<option value=""><c:out value="選択してください" />
-		<c:forEach items="${categories}" var="category">
-		<option value="${category}"><c:out value="${category}" /></option>
-		</c:forEach>
-		</select> <br />
+
+<div class="side-menu">
+	<div class = "form1">
+		<form action="narrow" method="get">
+		<div class="narrowCategory">
+			<label for="narrowCategory">カテゴリー</label>
+			<select name="narrowCategory" id="narrowCategory">
+			<option value=""><c:out value="選択してください" />
+			<c:forEach items="${categories}" var="category">
+				<option value="${category}"><c:out value="${category}" /></option>
+			</c:forEach>
+			</select>
+		</div>
+		<div class="narrowDate">
+			<div class="start">
+				<label for="narrowFirstDate">開始日</label>
+				<input name="narrowFirstDate" id="firstCalendar" type="text" readonly>
+			</div>
+			<div class="end">
+				<label for="narrowLastDate">終了日</label>
+				<input name="narrowLastDate" id="lastCalendar" type="text" readonly>
+			</div>
+		</div>
+		<div class="sort">
+			<input type="submit" value="絞り込む" />
+		</div>
+		</form>
 	</div>
-	<div class="narrowDate">
-	<label for="narrowFirstDate">開始日</label>
-	<input name="narrowFirstDate" id="firstCalendar" type="text" readonly>
-	<label for="narrowLastDate">終了日</label>
-	<input name="narrowLastDate" id="lastCalendar" type="text" readonly>
+	<div class="form2">
+	<form action="./" method="get">
+		<input type="submit" value="リセット" />
+	</form>
 	</div>
-	<input type="submit" value="絞り込む" />
-</form>
-<form action="./" method="get">
-<input type="submit" value="リセット" />
-</form>
 </div>
 
 <div class="contributions">
@@ -89,7 +105,7 @@
 			<div class="insert_date">投稿日時:<fmt:formatDate value="${contribution.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 			<form action="comment" method="post">
 				<label for="text"></label>
-				<input name="text" id="text" />
+				<input type="text" name="text" id="text" />
 				<input type="hidden" name="contributionId" id="contributionId" value="${contribution.id}" />
 				<input type="submit" value="コメントする" />
 			</form>

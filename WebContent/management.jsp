@@ -7,6 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ユーザー管理</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet" type="text/css">
+<link href="./css/main.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript">
 	function dialog(){
@@ -23,10 +25,13 @@
 
 </head>
 <body>
-<a href="./">ホーム</a>
-<a href="logout">ログアウト</a>
+
 <div class="main-contents">
+
+<a href="./">ホーム</a>
 <a href="signup">ユーザー新規登録</a>
+<a href="logout">ログアウト</a>
+
 <div class="users">
 	<c:forEach items="${users}" var="user">
 		<div class="user">

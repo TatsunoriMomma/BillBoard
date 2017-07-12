@@ -7,12 +7,16 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ユーザー新規登録</title>
-	<link href="./css/style.css" rel="stylesheet" type="text/css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet" type="text/css">
+	<link href="./css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+
+<div class="main-contents">
+
 <a href="./">ホーム</a>
 <a href="logout">ログアウト</a>
-<div class="main-contents">
+
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -23,12 +27,13 @@
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
+<div class = "signupForm ten columns">
 <form action="signup" method="post"><br />
 	<label for="loginId">ログインID</label>
-	<input name="loginId" id="loginId" value="${user.login_id}"/>半角英数6文字以上20字以下<br />
+	<input type="text" name="loginId" id="loginId" value="${user.login_id}"/>半角英数6文字以上20字以下<br />
 
 	<label for="name">名前</label>
-	<input name="name" id="name" value="${user.name}"/>10文字以下<br />
+	<input type="text" name="name" id="name" value="${user.name}"/>10文字以下<br />
 
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/>半角英数記号6文字以上20字以下<br />
@@ -60,8 +65,9 @@
 	</c:forEach>
 	</select> <br />
 
-	<input type="submit" value="登録" /> <br />
+	<input class="button-primary" type="submit" value="登録" /> <br />
 </form>
+</div>
 </div>
 </body>
 </html>

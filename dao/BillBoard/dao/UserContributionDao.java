@@ -89,13 +89,19 @@ public class UserContributionDao {
 
 			//要変更
 			if(firstDate.isEmpty()){
-				firstDate = "2017/06/01";
+				firstDate = "2017/07/01";
 			}
 			if(lastDate.isEmpty()){
-				lastDate = "2017/07/30";
-			} else {
-				lastDate += " 23:59:59";
+				lastDate = "2018/06/30";
 			}
+			int deff = firstDate.compareTo(lastDate);
+			if(deff > 0){
+				String temp = firstDate;
+				firstDate = lastDate;
+				lastDate = temp;
+			}
+			lastDate += " 23:59:59";
+
 			sql.append(" WHERE contributions.insert_date BETWEEN ? AND ?");
 			if(!category.isEmpty()){
 				sql.append(" AND category = ? ");
@@ -110,9 +116,6 @@ public class UserContributionDao {
 			} else {
 				ps.setString(1, firstDate);
 				ps.setString(2, lastDate);}
-			System.out.println(firstDate);
-			System.out.println(lastDate);
-			System.out.println(ps);
 
 			ResultSet rs = ps.executeQuery();
 			List<UserContribution> contributionList = toContributionList(rs);
