@@ -20,25 +20,29 @@ import BillBoard.beans.User;
 @WebFilter({"/management","/signup","/isWorking","/edit"})
 public class AffairsDepartmentFilter implements Filter{
 
+	private static final int HEAD_OFFICE = 1;
+	private static final int AFFIAIRS_DEPATMENT = 1;
+
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain){
 		try{
 
 			HttpSession session = ((HttpServletRequest)request).getSession(false);
-			User loginUser = (User) session.getAttribute("loginUser");
+
 
 			String loginURI = "/BillBoard/login";
 			List<String> messages = new ArrayList<String>() ;
 
-			if (loginUser == null){
+			if (session == null){
 				session = ((HttpServletRequest)request).getSession(true);
 				messages.add("ログインしてください");
 				session.setAttribute("errorMessages", messages);
 				((HttpServletResponse)response).sendRedirect(loginURI);
 				return;
 			} else {
+				User loginUser = (User) session.getAttribute("loginUser");
 				int branchId = loginUser.getBranch_id();
 				int departmentId = loginUser.getDepartment_id();
-				if (!(branchId == 1 && departmentId == 1)) {
+				if (!(branchId == HEAD_OFFICE && departmentId == AFFIAIRS_DEPATMENT)) {
 					messages.add("権限がありません");
 					session.setAttribute("errorMessages", messages);
 					((HttpServletResponse)response).sendRedirect("./");

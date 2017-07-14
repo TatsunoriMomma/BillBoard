@@ -11,7 +11,6 @@
 	<link href="./css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
 <div class="main-contents">
 
 <a href="./">ホーム</a>
@@ -27,19 +26,32 @@
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
-<div class = "signupForm ten columns">
+<div class = "signupForm shadow">
 <form action="signup" method="post"><br />
-	<label for="loginId">ログインID</label>
-	<input type="text" name="loginId" id="loginId" value="${user.login_id}"/>半角英数6文字以上20字以下<br />
 
-	<label for="name">名前</label>
-	<input type="text" name="name" id="name" value="${user.name}"/>10文字以下<br />
+	<h6 class="note"><label for="loginId">ログインID</label></h6>
+	<div class="subnote"><label for="loginId">(半角英数6文字以上20字以下)</label></div>
+	<br/>
+	<input type="text" name="loginId" id="loginId" value="${user.login_id}"/>
+	<br />
 
-	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password"/>半角英数記号6文字以上20字以下<br />
+	<h6 class="note"><label for="name">名前</label></h6>
+	<div class="subnote"><label for="name">(10文字以下)</label></div>
+	<br />
+	<input type="text" name="name" id="name" value="${user.name}"/>
+	<br />
 
-	<label for="checkPassword">パスワード(確認用)</label>
-	<input name="checkPassword" type="password" id="checkPassword"/> <br />
+	<h6 class="note"><label for="password">パスワード</label></h6>
+	<div class="subnote"><label for="name">半角英数記号6文字以上20字以下</label></div>
+	<br />
+	<input name="password" type="password" id="password"/>
+	<br />
+
+	<h6 class="note"><label for="checkPassword">パスワード</label></h6>
+	<div class="subnote"><label for="checkPassword">(確認用)</label></div>
+	<br />
+	<input name="checkPassword" type="password" id="checkPassword"/>
+	<br />
 
 	<label for="branchId">支店</label>
 	<select name="branchId" id="branchId">
@@ -65,7 +77,7 @@
 	</c:forEach>
 	</select> <br />
 
-	<input class="button-primary" type="submit" value="登録" /> <br />
+	<input class="button-submit" type="submit" value="登録" /> <br />
 </form>
 </div>
 </div>

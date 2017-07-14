@@ -91,25 +91,28 @@ public class SignUpServlet extends HttpServlet {
 		if (checkExistUser != null){
 			messages.add("指定されたログインIDは既に使用されています");
 		}
-		if (password.length() < 6 || password.length() > 255){
+		if(StringUtils.isBlank(name) == true){
+			messages.add("名前を入力してください");
+		} else if(name.length() > 10){
+			messages.add("名前の桁数に誤りがあります");
+		}
+		if(StringUtils.isBlank(password) == true){
+			messages.add("パスワードを入力してください");
+		} else if (password.length() < 6 || password.length() > 20){
 			messages.add("パスワードの桁数に誤りがあります");
 		}
 		if (!checkPassword.equals(password)){
 		messages.add("パスワード（確認用）が正しくありません");
 		}
-		if(StringUtils.isBlank(name) == true){
-			messages.add("名前を入力してください");
-		}
+
 		if(branch == 0){
 			messages.add("支店を選択してください");
 		}
 		if(department == 0){
 			messages.add("部署を選択してください");
-		}
-		if(branch != 1 && department <= 2){
+		} else if(branch != 1 && department <= 2){
 			messages.add("支店と部署の組み合わせが正しくありません");
-		}
-		if(branch == 1 && department > 2){
+		} else if(branch == 1 && department > 2){
 			messages.add("支店と部署の組み合わせが正しくありません");
 		}
 		if (messages.size() == 0) {

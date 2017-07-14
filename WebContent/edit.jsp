@@ -27,23 +27,37 @@
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 
+<div class="editForm shadow">
 <form action="edit" method="post" ><br />
 	<label for="editName">${editUser.name}さんの編集</label><br />
 	<input type="hidden" name="id" id="id" value="${editUser.id}" /><br />
 
-	<label for="loginId">ログインID</label>
-	<input name="loginId" value="${editUser.login_id}" />半角英数6文字以上20字以下<br />
+	<h6 class="note"><label for="loginId">ログインID</label></h6>
+	<div class="subnote"><label for="loginId">(半角英数6文字以上20字以下)</label></div>
+	<br />
+	<input type="text" name="loginId" value="${editUser.login_id}" />
+	<br />
 
-	<label for="name">名前</label>
-	<input name="name" value="${editUser.name}" id="name"/>10文字以下<br />
+	<h6 class="note"><label for="name">名前</label></h6>
+	<div class="subnote"><label for="name">(10文字以下)</label></div>
+	<br />
+	<input type ="text" name="name" value="${editUser.name}" id="name"/>
+	<br />
 
-	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password" />半角英数記号6文字以上20字以下<br />
+	<h6 class="note"><label for="password">パスワード</label></h6>
+	<div class="subnote"><label for="password">(半角英数記号6文字以上20字以下)</label></div>
+	<br />
+	<input name="password" type="password" id="password" />
+	<br />
 
-	<label for="checkPassword">パスワード（確認用）</label>
-	<input name="checkPassword" type="password" id="checkPassword"/> <br />
+	<h6 class="note"><label for="checkPassword">パスワード</label></h6>
+	<div class="subnote"><label for="checkPassword">(確認用)</label></div>
+	<br />
+	<input name="checkPassword" type="password" id="checkPassword"/>
+	<br />
 
-	<label for="branchId">支店</label>
+
+	<h6 class="note"><label for="branchId">支店</label></h6><br />
 	<select name="branchId" id="branchId">
 	<c:forEach items="${branches}" var="branch">
 		<option value="${branch.id}"
@@ -54,7 +68,7 @@
 	</c:forEach>
 	</select> <br />
 
-	<label for="departmentId">部署</label>
+	<h6 class="note"><label for="departmentId">部署</label></h6><br />
 	<select name="departmentId" id="departmentId">
 	<c:forEach items="${departments}" var="department">
 		<option value="${department.id}"
@@ -65,8 +79,9 @@
 	</c:forEach>
 	</select> <br />
 
-	<input type="submit" value="登録" /> <br />
+	<input class="button-submit" type="submit" value="登録" /> <br />
 </form>
+</div>
 </div>
 </body>
 </html>

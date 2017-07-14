@@ -11,7 +11,6 @@
 	<link href="./css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
 <div class="main-contents">
 
 <c:if test="${ not empty errorMessages }">
@@ -25,6 +24,7 @@
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 
+<div class="loginForm shadow">
 <form action="login" method="post"><br />
 	<label for="loginId">ログインID</label>
 	<input type="text" name="loginId" value="${loginId}" id="loginId"/> <br />
@@ -34,6 +34,7 @@
 
 	<input type="submit" value="ログイン" /> <br />
 </form>
+</div>
 </div>
 </body>
 </html>

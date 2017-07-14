@@ -27,10 +27,28 @@ public class EditServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		User editUser = new User();
-		int editUserId = Integer.parseInt(request.getParameter("editUserId"));
+
+		String queryString = request.getQueryString();
+
+		if(queryString == null){
+			response.sendRedirect("management");
+			return;
+		}
+		String stringEditUserId = request.getParameter("editUserId");
+		int editUserId = 0;
+		try {
+			editUserId = Integer.parseInt(stringEditUserId);
+		} catch ( NumberFormatException e){
+			response.sendRedirect("management");
+			return;
+		}
 		UserService userService = new UserService();
-		editUser = userService.getUser(editUserId);
+		if(userService.checkUserExistance(editUserId) == null){
+			response.sendRedirect("management");
+			return;
+		}
+
+		User editUser =  userService.getUser(editUserId);
 
 		List<Branch> branches = new ArrayList<Branch>();
 		List<Department> departments = new ArrayList<Department>();
@@ -38,6 +56,7 @@ public class EditServlet extends HttpServlet {
 		branches = branchService.getAllBranch();
 		DepartmentService departmentService = new DepartmentService();
 		departments = departmentService.getAllDepartment();
+
 
 		request.setAttribute("editUser", editUser);
 		request.setAttribute("branches", branches);
@@ -86,9 +105,6 @@ public class EditServlet extends HttpServlet {
 			}
 
 			response.sendRedirect("management");
-			//request.setAttribute("branches", branches);
-			//request.setAttribute("departments", departments);
-			//request.getRequestDispatcher("/management").forward(request, response);
 		} else {
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("editUser", user);
@@ -121,10 +137,11 @@ public class EditServlet extends HttpServlet {
 		if (checkExistUser != null && id != checkExistUser.getId() ){
 			messages.add("指定されたログインIDは既に使用されています");
 		}
-
-
+		if(name.length() > 10){
+			messages.add("名前の桁数に誤りがあります");
+		}
 		if(StringUtils.isBlank(request.getParameter("password")) != true) {
-			if (password.length() < 6 || password.length() > 255){
+			if (password.length() < 6 || password.length() > 20){
 				messages.add("パスワードの桁数に誤りがあります");
 			}
 		}

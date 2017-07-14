@@ -50,8 +50,19 @@ public class ContributionServlet extends HttpServlet {
 		user = (User) session.getAttribute("loginUser");
 		contribution.setSubject(request.getParameter("subject"));
 		contribution.setText(request.getParameter("text"));
-		contribution.setCategory(request.getParameter("category"));
 		contribution.setUser_id(user.getId());
+
+		String selectCategory = request.getParameter("selectCategory");
+		String newCategory = request.getParameter("newCategory");
+		if(!selectCategory.isEmpty() && !newCategory.isEmpty()){
+			contribution.setCategory("");
+		} else if(selectCategory.isEmpty() && newCategory.isEmpty()){
+			contribution.setCategory(newCategory);
+		} else if(!selectCategory.isEmpty() && newCategory.isEmpty()) {
+			contribution.setCategory(selectCategory);
+		} else if(selectCategory.isEmpty() && !newCategory.isEmpty()) {
+			contribution.setCategory(newCategory);
+		}
 
 		if(isValid(request, messages) == true) {
 
@@ -61,6 +72,8 @@ public class ContributionServlet extends HttpServlet {
 		} else {
 			session.setAttribute("errorMessages", messages);
 
+			request.setAttribute("selectCategory", selectCategory);
+			request.setAttribute("newCategory", newCategory);
 			request.setAttribute("contribution", contribution);
 			request.setAttribute("categories", categories);
 			request.getRequestDispatcher("contribution.jsp").forward(request, response);
@@ -70,16 +83,29 @@ public class ContributionServlet extends HttpServlet {
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 		String subject = request.getParameter("subject");
 		String text = request.getParameter("text");
-		String category = request.getParameter("category");
+		String selectCategory = request.getParameter("selectCategory");
+		String newCategory = request.getParameter("newCategory");
 
 		if (StringUtils.isEmpty(subject) == true) {
 			messages.add("件名を入力してください");
 		}
+		if (subject.length() > 30){
+			messages.add("件名は30文字以下です");
+		}
 		if (StringUtils.isEmpty(text) == true) {
 			messages.add("本文を入力してください");
 		}
-		if (StringUtils.isEmpty(category) == true) {
-			messages.add("カテゴリーを入力してください");
+		if (text.length() > 1000){
+			messages.add("本文は1000文字以下です");
+		}
+		if (selectCategory.isEmpty() && newCategory.isEmpty()) {
+			messages.add("カテゴリーを入力、または選択してください");
+		}
+		if (!selectCategory.isEmpty() && !newCategory.isEmpty()) {
+			messages.add("カテゴリーは入力、または選択のどちらかひとつしかできません");
+		}
+		if (newCategory.length() > 10){
+			messages.add("カテゴリーは10文字以下です");
 		}
 		if (messages.size() == 0) {
 			return true;

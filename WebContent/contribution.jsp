@@ -26,20 +26,22 @@
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 
+<div class ="contributionForm shadow">
 <form action="contribution" method="post"><br />
 	<div class="row">
 
 	<div class="six columns">
-		<label for="subject">件名</label>
-		<input type="text" class="u-full-width" name="subject" id="subject" value="${contribution.subject}" />30文字以下<br />
+		<label for="subject">件名(30文字以下)</label>
+		<input type="text" class="u-full-width" name="subject" id="subject" value="${contribution.subject}" /><br />
 	</div>
 
-	<div class="four columns">
-		<label for="category">カテゴリー</label>
-		<select name="category" id="category">
+	<div class="three columns">
+		<label for="selectCategory">カテゴリー</label>
+		<select name="selectCategory" id="selectCategory">
+		<option value=""><c:out value="選択してください" />
 		<c:forEach items="${categories}" var="category">
 		<option value="${category}"
-		<c:if test="${contribution.category == category}">selected</c:if>
+		<c:if test="${selectCategory == category}">selected</c:if>
 		>
 		<c:out value="${category}" />
 		</option>
@@ -47,14 +49,20 @@
 		</select>
 	</div>
 
+	<div class="three columns">
+		<label for="newCategory">新規カテゴリー</label>
+		<input type="text" name="newCategory" id="newCategory" value="${newCategory}"/>
+	</div>
+
 	</div>
 
 
-	<label for="text">本文</label>
+	<label for="text">本文(1000文字以下)</label>
 	<textarea class="u-full-width" name="text" id="text"  >${contribution.text}</textarea>
 
-	<input class="button-primary" type="submit" value="登録" /> <br />
+	<input class="button-submit" type="submit" value="登録" /> <br />
 </form>
+</div>
 </div>
 </body>
 </html>

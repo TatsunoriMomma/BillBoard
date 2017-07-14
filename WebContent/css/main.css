@@ -1,0 +1,117 @@
+@CHARSET "UTF-8";
+
+body {
+}
+
+form {
+	margin-bottom: 0;
+}
+input {
+	margin-bottom: 0;
+}
+table {
+	margin: 10px;
+	padding: 20px;
+}
+.main-contents {
+	margin: 0 20%;
+	background: white;
+}
+
+.commentList {
+	display:none;
+}
+
+.signupForm {
+	margin-left: 0;
+    padding: 20px;
+    margin: 10px;
+}
+.contributionForm {
+	padding: 20px;
+    margin: 10px;
+}
+.editForm {
+	padding: 20px;
+    margin: 10px;
+}
+.loginForm {
+	padding: 20px;
+    margin: 10px;
+}
+.shadow {
+	border: 1px solid #E6EAEE;
+}
+input.button-submit{
+	background: #33C3F0;
+	border-color: #33C3F0;
+	color: white;
+
+}
+input.button-delete {
+	background: #F67272;
+	border-color: #F67272;
+	color: white;
+}
+input.button-stop {
+	background: #F7F39A;
+	border-color: #F7F39A;
+	color: white;
+}
+input.button-revive {
+	background: #A3DE83;
+	border-color: #A3DE83;
+	color: white;
+}
+.note {
+	display: inline-block;
+	margin-bottom: 0;
+
+}
+.subnote {
+	display: inline-block;
+}
+
+
+.side-menu {
+	margin: 10px;
+	padding: 20px;
+}
+.contributions {
+	padding: 20px;
+    margin: 10px;
+}
+.contribution {
+	padding: 20px;
+    margin: 10px;
+}
+
+.form1 {
+	display: inline-block;
+}
+
+.form2 {
+	display: inline-block;
+}
+
+.narrowCategory {
+	display: inline-block;
+}
+
+.narrowDate {
+	display: inline-block;
+}
+.start {
+	display: inline-block;
+}
+.end {
+	display: inline-block;
+}
+
+.sort {
+	display: inline-block;
+}
+
+.Cview .commentList {
+	display: block;
+}

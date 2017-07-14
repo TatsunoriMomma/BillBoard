@@ -10,12 +10,15 @@
 	<title>ホーム</title>
 
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet" type="text/css">
+	<script src="https://use.fontawesome.com/1e2813cc8e.js"></script>
 	<link href="./css/main.css" rel="stylesheet" type="text/css">
+	<link href="./css/home.css" rel="stylesheet" type="text/css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/blitzer/jquery-ui.css" >
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css" >
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+	<script type="text/javascript" src='<c:url value="./js/main.js"/>'></script>
 
 	<script>
 	$(function() {
@@ -58,10 +61,10 @@
 
 
 <div class="profile">
-	<div class="name"><h2><c:out value="${loginUser.name}"/></h2></div>
+	<div class="loginUserName"><h5>こんにちは！<c:out value="${loginUser.name}"/>さん！</h5></div>
 </div>
 
-<div class="side-menu">
+<div class="side-menu shadow">
 	<div class = "form1">
 		<form action="narrow" method="get">
 		<div class="narrowCategory">
@@ -84,7 +87,7 @@
 			</div>
 		</div>
 		<div class="sort">
-			<input type="submit" value="絞り込む" />
+			<input class="button-submit" type="submit" value="絞り込む" />
 		</div>
 		</form>
 	</div>
@@ -95,50 +98,60 @@
 	</div>
 </div>
 
-<div class="contributions">
+<div class="contributions shadow">
 	<c:forEach items="${contributions}" var="contribution">
-		<div class="contribution">
-			<div class="subject">件名:<c:out value="${contribution.subject}"/></div>
+		<div class="contribution shadow">
+			<div class="contributionInfo">
+				<div class="category">カテゴリー:<c:out value="${contribution.category}" /></div>
+				<h5 class="subject">件名:<c:out value="${contribution.subject}"/></h5>
+				<div class="name"><i class="fa fa-user" ></i><c:out value="${contribution.name}" /></div>
+				<div class="insert_date"><i class="fa fa-clock-o" ></i><fmt:formatDate value="${contribution.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
+			</div>
 			<div class="text"><c:out value="${contribution.text}"/></div>
-			<div class="category">カテゴリー:<c:out value="${contribution.category}" /></div>
-			<div class="user_id">名前:<c:out value="${contribution.name}" /></div>
-			<div class="insert_date">投稿日時:<fmt:formatDate value="${contribution.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
-			<form action="comment" method="post">
-				<label for="text"></label>
-				<input type="text" name="text" id="text" />
-				<input type="hidden" name="contributionId" id="contributionId" value="${contribution.id}" />
-				<input type="submit" value="コメントする" />
-			</form>
+
 			<form action="deleteContribution" method="post">
 				<input type="hidden" name="contributionId" id="contributionId" value="${contribution.id}" />
 				<c:choose>
-					<c:when test="${contribution.user_id == loginUser.id}" ><input type="submit" value="投稿削除" /></c:when>
-					<c:when test="${loginUser.department_id == 2}" ><input type="submit" value="投稿削除" /></c:when>
+					<c:when test="${contribution.user_id == loginUser.id}" ><input class=" button-delete" type="submit" value="投稿削除" /></c:when>
+					<c:when test="${loginUser.department_id == 2}" ><input class=" button-delete" type="submit" value="投稿削除" /></c:when>
 					<c:when test="${loginUser.department_id == 3 && contribution.department_id == 4 && loginUser.branch_id == contribution.branch_id}" >
-					<input type="submit" value="投稿削除" />
+					<input class=" button-delete" type="submit" value="投稿削除" />
 					</c:when>
 				</c:choose>
 			</form>
 
+			<form action="comment" method="post">
+				<label for="text"></label>
+				<textarea  class="u-full-width" name="text" id="text" ></textarea>
+				<input type="hidden" name="contributionId" id="contributionId" value="${contribution.id}" />
+				<input class="button-submit" type="submit" value="コメントする" />
+			</form>
+
+			<div class = "commentView">
+				<button>コメント非表示 </button>
+			</div>
+
+			<div class = "commentList shadow">
 			<c:forEach items="${comments}" var="comment">
 				<div class="comment">
 					<c:if test="${contribution.id == comment.contribution_id}" >
-						<div class="name">名前:<c:out value="${comment.name}" /></div>
+						<div class="name"><i class="fa fa-user" ></i><c:out value="${comment.name}" /></div>
+						<div class="insert_date"><i class="fa fa-clock-o" ></i><fmt:formatDate value="${comment.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 						<div class="text"><c:out value="${comment.text}" /></div>
-						<div class="insert_date">投稿日時:<fmt:formatDate value="${comment.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 						<form action="commentDelete" method="post">
 							<input type="hidden" name="commentId" id="commentId" value="${comment.id}" />
 								<c:choose>
-									<c:when test="${comment.user_id == loginUser.id}" ><input type="submit" value="コメント削除" /></c:when>
-									<c:when test="${loginUser.department_id == 2}" ><input type="submit" value="コメント削除" /></c:when>
+									<c:when test="${comment.user_id == loginUser.id}" ><input class="button-delete" type="submit" value="コメント削除" /></c:when>
+									<c:when test="${loginUser.department_id == 2}" ><input class="button-delete" type="submit" value="コメント削除" /></c:when>
 									<c:when test="${loginUser.department_id == 3 && comment.department_id == 4 && loginUser.branch_id == comment.branch_id}" >
-									<input type="submit" value="コメント削除" />
+									<input class="button-delete" type="submit" value="コメント削除" />
 									</c:when>
 								</c:choose>
 						</form>
 					</c:if>
 				</div>
 			</c:forEach>
+			</div>
 		</div>
 		<br>
 	</c:forEach>
