@@ -54,11 +54,7 @@ public class ContributionServlet extends HttpServlet {
 
 		String selectCategory = request.getParameter("selectCategory");
 		String newCategory = request.getParameter("newCategory");
-		if(!selectCategory.isEmpty() && !newCategory.isEmpty()){
-			contribution.setCategory("");
-		} else if(selectCategory.isEmpty() && newCategory.isEmpty()){
-			contribution.setCategory(newCategory);
-		} else if(!selectCategory.isEmpty() && newCategory.isEmpty()) {
+		if (!selectCategory.isEmpty() && newCategory.isEmpty()) {
 			contribution.setCategory(selectCategory);
 		} else if(selectCategory.isEmpty() && !newCategory.isEmpty()) {
 			contribution.setCategory(newCategory);

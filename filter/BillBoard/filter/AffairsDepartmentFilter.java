@@ -40,6 +40,12 @@ public class AffairsDepartmentFilter implements Filter{
 				return;
 			} else {
 				User loginUser = (User) session.getAttribute("loginUser");
+				if (loginUser == null){
+					session = ((HttpServletRequest)request).getSession(true);
+					messages.add("ログインしてください");
+					session.setAttribute("errorMessages", messages);
+					((HttpServletResponse)response).sendRedirect(loginURI);
+				} else {
 				int branchId = loginUser.getBranch_id();
 				int departmentId = loginUser.getDepartment_id();
 				if (!(branchId == HEAD_OFFICE && departmentId == AFFIAIRS_DEPATMENT)) {
@@ -48,9 +54,10 @@ public class AffairsDepartmentFilter implements Filter{
 					((HttpServletResponse)response).sendRedirect("./");
 					return;
 				}
+			}
 
 			}
-			System.out.println("AffairsDepartmentFilterが実行されました。");
+			//System.out.println("AffairsDepartmentFilterが実行されました。");
 		chain.doFilter(request, response);
 
 		}catch (ServletException e){

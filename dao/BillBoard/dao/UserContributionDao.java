@@ -88,10 +88,10 @@ public class UserContributionDao {
 			sql.append(" ON contributions.user_id = users.id");
 
 			//要変更
-			if(firstDate.isEmpty()){
+			if(firstDate == null || firstDate.isEmpty()){
 				firstDate = "2017/07/01";
 			}
-			if(lastDate.isEmpty()){
+			if(lastDate == null || lastDate.isEmpty()){
 				lastDate = "2018/06/30";
 			}
 			int deff = firstDate.compareTo(lastDate);
@@ -103,13 +103,13 @@ public class UserContributionDao {
 			lastDate += " 23:59:59";
 
 			sql.append(" WHERE contributions.insert_date BETWEEN ? AND ?");
-			if(!category.isEmpty()){
+			if(category != null && !category.isEmpty()){
 				sql.append(" AND category = ? ");
 			}
 			sql.append(" ORDER BY insert_date DESC");
 			ps = connection.prepareStatement(sql.toString());
 
-			if(!category.isEmpty()){
+			if(category != null && !category.isEmpty()){
 				ps.setString(1, firstDate);
 				ps.setString(2, lastDate);
 				ps.setString(3, category);

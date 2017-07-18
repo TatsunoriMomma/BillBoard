@@ -9,12 +9,34 @@
 <title>新規投稿</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet" type="text/css">
 <link href="./css/main.css" rel="stylesheet" type="text/css">
+<link href="./css/contribution.css" rel="stylesheet" type="text/css">
+
+<script language="JavaScript">
+<!-- ダブルクリック防止(通信が遅い場合など未対応) -- >
+function double(form) {
+	var elements = form.elements;
+	for (var i = 0; i < elements.length; i++) {
+		if (elements[i].type == 'submit') {
+			elements[i].disabled = true;
+		}
+	}
+}
+</script>
+
+
 </head>
 <body>
 
+<div class="header shadow">
+<h4>わったい菜掲示板</h4>
+<div class="links">
+<a class="home-tran" href="./">ホーム</a>
+<a class="logout-tran" href="logout">ログアウト</a>
+</div>
+</div>
+
 <div class="main-contents">
-<a href="./">ホーム</a>
-<a href="logout">ログアウト</a>
+
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -27,12 +49,12 @@
 </c:if>
 
 <div class ="contributionForm shadow">
-<form action="contribution" method="post"><br />
+<form action="contribution" method="post" onSubmit="return double(this)"><br />
 	<div class="row">
 
 	<div class="six columns">
 		<label for="subject">件名(30文字以下)</label>
-		<input type="text" class="u-full-width" name="subject" id="subject" value="${contribution.subject}" /><br />
+		<input type="text" class="u-full-width" name="subject" id="subject" maxlength=30 value="${contribution.subject}" /><br />
 	</div>
 
 	<div class="three columns">
@@ -50,15 +72,15 @@
 	</div>
 
 	<div class="three columns">
-		<label for="newCategory">新規カテゴリー</label>
-		<input type="text" name="newCategory" id="newCategory" value="${newCategory}"/>
+		<label for="newCategory">新規カテゴリー(10文字以下)</label>
+		<input type="text" name="newCategory" id="newCategory" maxlength=10 value="${newCategory}"/>
 	</div>
 
 	</div>
 
 
 	<label for="text">本文(1000文字以下)</label>
-	<textarea class="u-full-width" name="text" id="text"  >${contribution.text}</textarea>
+	<textarea class="u-full-width" name="text" id="text" maxlength=1000 >${contribution.text}</textarea>
 
 	<input class="button-submit" type="submit" value="登録" /> <br />
 </form>

@@ -22,16 +22,23 @@
 	window.alert("キャンセルしました")
 	return false;
 	}
-	</script>
+</script>
 
 </head>
 <body>
 
+<div class="header shadow">
+<h4>わったい菜掲示板</h4>
+<div class="links">
+<a class="home-tran" href="./">ホーム</a>
+<a class="signup-tran" href="signup">ユーザー新規登録</a>
+<a class="logout-tran" href="logout">ログアウト</a>
+</div>
+</div>
+
 <div class="main-contents">
 
-<a href="./">ホーム</a>
-<a href="signup">ユーザー新規登録</a>
-<a href="logout">ログアウト</a>
+
 
 
 <table class="u-full-width shadow">

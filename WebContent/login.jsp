@@ -11,6 +11,10 @@
 	<link href="./css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="loginTitle">
+<h3>わったい菜掲示板</h3>
+</div>
+
 <div class="main-contents">
 
 <c:if test="${ not empty errorMessages }">
@@ -32,7 +36,7 @@
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/> <br />
 
-	<input type="submit" value="ログイン" /> <br />
+	<input class="button-submit" type="submit" value="ログイン" /> <br />
 </form>
 </div>
 </div>

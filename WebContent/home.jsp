@@ -42,11 +42,16 @@
 </head>
 <body>
 
-<div class="main-contents">
+<div class="header shadow">
+<h4>わったい菜掲示板</h4>
+<div class="links">
+<a class="contribution-tran" href="contribution">新規投稿</a>
+<a class="management-tran" href="management">ユーザー管理</a>
+<a class="logout-tran" href="logout">ログアウト</a>
+</div>
+</div>
 
-<a href="contribution">新規投稿</a>
-<a href="management">ユーザー管理</a>
-<a href="logout">ログアウト</a>
+<div class="main-contents">
 
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
@@ -122,16 +127,17 @@
 
 			<form action="comment" method="post">
 				<label for="text"></label>
-				<textarea  class="u-full-width" name="text" id="text" ></textarea>
+				<textarea  class="u-full-width" name="text" id="text" maxlength=500 onkeyup ="CountDownLength(text,value,500);"></textarea>
+				<span id="text"></span>
 				<input type="hidden" name="contributionId" id="contributionId" value="${contribution.id}" />
 				<input class="button-submit" type="submit" value="コメントする" />
 			</form>
 
 			<div class = "commentView">
-				<button>コメント非表示 </button>
+				<button>コメント表示 </button>
 			</div>
 
-			<div class = "commentList shadow">
+			<div class = "commentList shadow" id="commentList" >
 			<c:forEach items="${comments}" var="comment">
 				<div class="comment">
 					<c:if test="${contribution.id == comment.contribution_id}" >

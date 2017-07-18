@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 
 body {
+	margin:0;
 }
 
 form {
@@ -13,13 +14,55 @@ table {
 	margin: 10px;
 	padding: 20px;
 }
+h4 {
+	margin-bottom: 0;
+	display:inline-block;
+	padding:0 13px;
+}
+h5 {
+	margin-bottom:0;
+}
+.loginTitle {
+	text-align:center;
+	padding-top:40px;
+}
+.errorMessages {
+	color:red;
+}
+.header {
+	width:100%;
+}
+.links {
+	display:inline-block;
+	text-align:center;
+}
+.home-tran {
+	padding:0 13px;
+}
+.contribution-tran {
+	padding:0 13px;
+}
+.management-tran {
+	padding:0 13px;
+}
+.logout-tran {
+	padding:0 13px;
+}
+.signup-tran {
+	padding:0 13px;
+}
 .main-contents {
 	margin: 0 20%;
 	background: white;
 }
-
+.contributions {
+	word-break:break-word;
+}
 .commentList {
 	display:none;
+}
+.comment {
+	 word-break: break-word;
 }
 
 .signupForm {
@@ -38,6 +81,7 @@ table {
 .loginForm {
 	padding: 20px;
     margin: 10px;
+    text-align:center;
 }
 .shadow {
 	border: 1px solid #E6EAEE;
@@ -46,22 +90,26 @@ input.button-submit{
 	background: #33C3F0;
 	border-color: #33C3F0;
 	color: white;
+	margin:10px;
 
 }
 input.button-delete {
 	background: #F67272;
 	border-color: #F67272;
 	color: white;
+	margin:10px;
 }
 input.button-stop {
 	background: #F7F39A;
 	border-color: #F7F39A;
 	color: white;
+	margin:10px;
 }
 input.button-revive {
 	background: #A3DE83;
 	border-color: #A3DE83;
 	color: white;
+	margin:10px;
 }
 .note {
 	display: inline-block;

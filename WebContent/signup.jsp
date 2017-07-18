@@ -11,10 +11,14 @@
 	<link href="./css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="header shadow">
+<h4>わったい菜掲示板</h4>
+<div class="links">
+<a class="home-tran" href="./">ホーム</a>
+<a class="logout-tran" href="logout">ログアウト</a>
+</div>
+</div>
 <div class="main-contents">
-
-<a href="./">ホーム</a>
-<a href="logout">ログアウト</a>
 
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">

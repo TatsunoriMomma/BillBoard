@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import BillBoard.beans.User;
+import BillBoard.service.UserService;
+
 @WebFilter("/*")
 public class LoginFilter implements Filter{
 
@@ -43,10 +46,24 @@ public class LoginFilter implements Filter{
 						session.setAttribute("errorMessages", messages);
 						((HttpServletResponse)response).sendRedirect(loginURI);
 						return;
+					} else {
+						//DBからユーザー停止復活チェック
+						User loginUser = (User) loginCheck;
+						String loginId = loginUser.getLogin_id();
+						UserService userService = new UserService();
+						int isWorking = userService.checkUserExistance(loginId).getIs_working();
+						if (isWorking == 1){
+							session.setAttribute("target", target);
+							messages.add("ログインしてください");
+							session.setAttribute("errorMessages", messages);
+							((HttpServletResponse)response).sendRedirect(loginURI);
+							return;
+						}
+
 					}
 				}
 			}
-			//System.out.println("LoginFilterが実行されました。");
+			//System.out.println("LoginFilterは実行されました。");
 			chain.doFilter(request, response);
 
 		}catch (ServletException e){
