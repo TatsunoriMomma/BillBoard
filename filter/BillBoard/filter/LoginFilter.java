@@ -47,17 +47,27 @@ public class LoginFilter implements Filter{
 						((HttpServletResponse)response).sendRedirect(loginURI);
 						return;
 					} else {
-						//DBからユーザー停止復活チェック
 						User loginUser = (User) loginCheck;
-						String loginId = loginUser.getLogin_id();
+						int id = loginUser.getId();
 						UserService userService = new UserService();
-						int isWorking = userService.checkUserExistance(loginId).getIs_working();
-						if (isWorking == 1){
+						User checkUserExistance = userService.checkUserExistance(id);
+						//ログイン中のユーザーが削除された場合
+						if(checkUserExistance == null) {
 							session.setAttribute("target", target);
 							messages.add("ログインしてください");
 							session.setAttribute("errorMessages", messages);
 							((HttpServletResponse)response).sendRedirect(loginURI);
 							return;
+						} else {
+							//DBからユーザー停止復活チェック
+							int isWorking = checkUserExistance.getIs_working();
+							if (isWorking == 1){
+								session.setAttribute("target", target);
+								messages.add("ログインしてください");
+								session.setAttribute("errorMessages", messages);
+								((HttpServletResponse)response).sendRedirect(loginURI);
+								return;
+							}
 						}
 
 					}

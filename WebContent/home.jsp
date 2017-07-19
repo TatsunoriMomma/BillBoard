@@ -37,6 +37,38 @@
 	});
 	</script>
 
+<!-- 連番付与のファンクション -->
+	<script type="text/javascript">
+	$(function(){
+	    $('div.contributions span.maxtext').each(function(i){
+	        $(this).attr('id','maxtext' + (i+1));
+	    });
+	});
+	</script>
+
+	<script type="text/javascript">
+	$(function(){
+	    $('div.contributions textarea.text').each(function(i){
+	        $(this).attr('id','text' + (i+1));
+	    });
+	});
+	</script>
+
+	<script type="text/javascript">
+	$(function(){
+	    $('div.contributions div.commentView').each(function(i){
+	        $(this).attr('id','commentView' + (i+1));
+	    });
+	});
+	</script>
+
+	<script type="text/javascript">
+	$(function(){
+	    $('div.contributions div.commentList').each(function(i){
+	        $(this).attr('id','commentList' + (i+1));
+	    });
+	});
+	</script>
 
 
 </head>
@@ -77,18 +109,22 @@
 			<select name="narrowCategory" id="narrowCategory">
 			<option value=""><c:out value="選択してください" />
 			<c:forEach items="${categories}" var="category">
-				<option value="${category}"><c:out value="${category}" /></option>
+				<option value="${category}"
+				<c:if test="${narrowCategory == category}" >selected</c:if>
+				>
+				<c:out value="${category}" />
+				</option>
 			</c:forEach>
 			</select>
 		</div>
 		<div class="narrowDate">
 			<div class="start">
 				<label for="narrowFirstDate">開始日</label>
-				<input name="narrowFirstDate" id="firstCalendar" type="text" readonly>
+				<input name="narrowFirstDate" id="firstCalendar" type="text" value="${narrowFirstDate}" readonly>
 			</div>
 			<div class="end">
 				<label for="narrowLastDate">終了日</label>
-				<input name="narrowLastDate" id="lastCalendar" type="text" readonly>
+				<input name="narrowLastDate" id="lastCalendar" type="text" value="${narrowLastDate}" readonly>
 			</div>
 		</div>
 		<div class="sort">
@@ -105,11 +141,16 @@
 
 <div class="contributions shadow">
 	<c:forEach items="${contributions}" var="contribution">
-		<div class="contribution shadow">
+		<div class="contribution shadow ">
 			<div class="contributionInfo">
 				<div class="category">カテゴリー:<c:out value="${contribution.category}" /></div>
 				<h5 class="subject">件名:<c:out value="${contribution.subject}"/></h5>
-				<div class="name"><i class="fa fa-user" ></i><c:out value="${contribution.name}" /></div>
+				<div class="name"><i class="fa fa-user" ></i>
+					<c:choose>
+						<c:when test="${contribution.name == null }" ><c:out value="このユーザーは削除されました"/></c:when>
+						<c:when test="${contribution.name != null }"><c:out value="${contribution.name}"/></c:when>
+					</c:choose>
+				</div>
 				<div class="insert_date"><i class="fa fa-clock-o" ></i><fmt:formatDate value="${contribution.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 			</div>
 			<div class="text"><c:out value="${contribution.text}"/></div>
@@ -127,13 +168,13 @@
 
 			<form action="comment" method="post">
 				<label for="text"></label>
-				<textarea  class="u-full-width" name="text" id="text" maxlength=500 onkeyup ="CountDownLength('maxtext',value,500);"></textarea>
-				<span id="maxtext">あと500文字</span>
+				<textarea  class="u-full-width text" name="text" id="text" maxlength=500 onkeyup ="CountDownLength(this.id,value,500);"></textarea>
+				<span class="maxtext" id="maxtext">あと500文字</span>
 				<input type="hidden" name="contributionId" id="contributionId" value="${contribution.id}" />
 				<input class="button-submit" type="submit" value="コメントする" />
 			</form>
 
-			<div class = "commentView">
+			<div class = "commentView" id = "commentView">
 				<button>コメント表示 </button>
 			</div>
 
@@ -141,7 +182,13 @@
 			<c:forEach items="${comments}" var="comment">
 				<div class="comment">
 					<c:if test="${contribution.id == comment.contribution_id}" >
-						<div class="name"><i class="fa fa-user" ></i><c:out value="${comment.name}" /></div>
+						<div class="name"><i class="fa fa-user" ></i>
+							<c:choose>
+								<c:when test="${comment.name == null }" ><c:out value="このユーザーは削除されました"/></c:when>
+								<c:when test="${comment.name != null }"><c:out value="${comment.name}"/></c:when>
+							</c:choose>
+						</div>
+
 						<div class="insert_date"><i class="fa fa-clock-o" ></i><fmt:formatDate value="${comment.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 						<div class="text"><c:out value="${comment.text}" /></div>
 						<form action="commentDelete" method="post">
@@ -158,6 +205,7 @@
 				</div>
 			</c:forEach>
 			</div>
+
 		</div>
 		<br>
 	</c:forEach>

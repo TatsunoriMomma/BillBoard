@@ -98,6 +98,7 @@ public class EditServlet extends HttpServlet {
 
 			try {
 				new UserService().update(user);
+
 			} catch (NoRowsUpdatedRuntimeException e) {
 				messages.add("他の人によって更新されています。最新のデータを表示しました。データを確認してください。");
 				session.setAttribute("errorMessages", messages);

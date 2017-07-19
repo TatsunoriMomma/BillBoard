@@ -40,6 +40,9 @@ public class NarrowServlet extends HttpServlet {
 		ContributionService contributionService = new ContributionService();
 		categories = contributionService.getAllCategory();
 
+		request.setAttribute("narrowCategory", category);
+		request.setAttribute("narrowFirstDate", firstDate);
+		request.setAttribute("narrowLastDate", lastDate);
 		request.setAttribute("contributions", contributions);
 		request.setAttribute("comments", comments);
 		request.setAttribute("categories", categories);

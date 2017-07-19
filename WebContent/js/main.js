@@ -12,5 +12,5 @@ $(function () {
 });
 
 function CountDownLength (id,str,max) {
-	document.getElementById(id).innerHTML = "あと" + (max - str.length) + "文字";
+	document.getElementById("max" +id).innerHTML = "あと" + (max - str.length) + "文字";
 }

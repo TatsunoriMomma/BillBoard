@@ -66,24 +66,50 @@
 
 	<h6 class="note"><label for="branchId">支店</label></h6><br />
 	<select name="branchId" id="branchId">
-	<c:forEach items="${branches}" var="branch">
-		<option value="${branch.id}"
-		<c:if test="${editUser.branch_id == branch.id}" >selected</c:if>
-		>
-		<c:out value="${branch.name}" />
-		</option>
-	</c:forEach>
+	 <c:choose>
+	 	<c:when test="${loginUser.id == editUser.id}">
+			<option value="${loginUser.branch_id}">
+				<c:forEach items="${branches}" var="branch">
+					<c:if test="${loginUser.branch_id == branch.id}" >
+					<c:out value="${branch.name}" />
+					</c:if>
+				</c:forEach>
+			</option>
+		</c:when>
+		<c:otherwise>
+			<c:forEach items="${branches}" var="branch">
+				<option value="${branch.id}"
+				<c:if test="${editUser.branch_id == branch.id}" >selected</c:if>
+				>
+				<c:out value="${branch.name}" />
+				</option>
+			</c:forEach>
+		</c:otherwise>
+	</c:choose>
 	</select> <br />
 
 	<h6 class="note"><label for="departmentId">部署</label></h6><br />
 	<select name="departmentId" id="departmentId">
-	<c:forEach items="${departments}" var="department">
-		<option value="${department.id}"
-		<c:if test="${editUser.department_id == department.id}" >selected</c:if>
-		>
-		<c:out value="${department.name}" />
-		</option>
-	</c:forEach>
+		<c:choose>
+			<c:when test="${editUser.id == loginUser.id}">
+				<option value="${loginUser.department_id}">
+					<c:forEach items="${departments}" var="department">
+						<c:if test="${loginUser.department_id == department.id}" >
+						<c:out value="${department.name}" />
+						</c:if>
+					</c:forEach>
+				</option>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${departments}" var="department">
+					<option value="${department.id}"
+					<c:if test="${editUser.department_id == department.id}" >selected</c:if>
+					>
+					<c:out value="${department.name}" />
+					</option>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
 	</select> <br />
 
 	<input class="button-submit" type="submit" value="登録" /> <br />
