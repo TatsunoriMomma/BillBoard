@@ -127,8 +127,8 @@
 
 			<form action="comment" method="post">
 				<label for="text"></label>
-				<textarea  class="u-full-width" name="text" id="text" maxlength=500 onkeyup ="CountDownLength(text,value,500);"></textarea>
-				<span id="text"></span>
+				<textarea  class="u-full-width" name="text" id="text" maxlength=500 onkeyup ="CountDownLength('maxtext',value,500);"></textarea>
+				<span id="maxtext">あと500文字</span>
 				<input type="hidden" name="contributionId" id="contributionId" value="${contribution.id}" />
 				<input class="button-submit" type="submit" value="コメントする" />
 			</form>

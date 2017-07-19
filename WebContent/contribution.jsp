@@ -11,6 +11,8 @@
 <link href="./css/main.css" rel="stylesheet" type="text/css">
 <link href="./css/contribution.css" rel="stylesheet" type="text/css">
 
+<script type="text/javascript" src='<c:url value="./js/main.js"/>'></script>
+
 <script language="JavaScript">
 <!-- ダブルクリック防止(通信が遅い場合など未対応) -- >
 function double(form) {
@@ -80,8 +82,8 @@ function double(form) {
 
 
 	<label for="text">本文(1000文字以下)</label>
-	<textarea class="u-full-width" name="text" id="text" maxlength=1000 >${contribution.text}</textarea>
-
+	<textarea class="u-full-width" rows="20" name="text" id="text" maxlength=1000 onkeyup ="CountDownLength('maxtext',value,1000);">${contribution.text}</textarea>
+	<span id="maxtext">あと1000文字</span>
 	<input class="button-submit" type="submit" value="登録" /> <br />
 </form>
 </div>

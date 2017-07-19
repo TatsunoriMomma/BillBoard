@@ -45,6 +45,7 @@ public class AffairsDepartmentFilter implements Filter{
 					messages.add("ログインしてください");
 					session.setAttribute("errorMessages", messages);
 					((HttpServletResponse)response).sendRedirect(loginURI);
+					return;
 				} else {
 				int branchId = loginUser.getBranch_id();
 				int departmentId = loginUser.getDepartment_id();

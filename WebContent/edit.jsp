@@ -36,7 +36,7 @@
 
 <div class="editForm shadow">
 <form action="edit" method="post" ><br />
-	<label for="editName">${editUser.name}さんの編集</label><br />
+	<!-- <label for="editName">${editUser.name}さんの編集</label><br /> -->
 	<input type="hidden" name="id" id="id" value="${editUser.id}" /><br />
 
 	<h6 class="note"><label for="loginId">ログインID</label></h6>
