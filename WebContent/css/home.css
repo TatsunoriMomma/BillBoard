@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+.profile {
+	margin: 10px;
+}
+.loginUserName {
+
+}
+.subject {
+	 border-bottom: 2px solid #E1F5F2;
+	 margin-bottom: 0;
+}
+.category {
+
+}
+.contributionInfo {
+}
+.name {
+	float : left;
+}
+.insert_date {
+}
+#maxtext {
+	float:right;
+}

@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+body {
+
+}
+textarea {
+	height:194px;
+}
+.main-contents {
+	margin: 0 15%;
+}
+
+.edit .is_working .delete {
+
+}
+#maxtext {
+	float:right;
+}
