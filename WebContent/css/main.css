@@ -111,6 +111,13 @@ input.button-revive {
 	color: white;
 	margin:10px;
 }
+input.commentB {
+	border:white;
+	color: #33C3F0;
+}
+.comment-button-wrapper {
+	text-align:center;
+}
 .note {
 	display: inline-block;
 	margin-bottom: 0;
@@ -159,7 +166,8 @@ input.button-revive {
 .sort {
 	display: inline-block;
 }
-
+/*
 .Cview .commentList {
 	display: block;
 }
+*/

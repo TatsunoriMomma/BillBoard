@@ -3,6 +3,7 @@
 <%@page isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -56,8 +57,8 @@
 
 	<script type="text/javascript">
 	$(function(){
-	    $('div.contributions div.commentView').each(function(i){
-	        $(this).attr('id','commentView' + (i+1));
+	    $('div.contributions input.commentB').each(function(i){
+	        $(this).attr('id','commentB' + (i+1));
 	    });
 	});
 	</script>
@@ -65,10 +66,12 @@
 	<script type="text/javascript">
 	$(function(){
 	    $('div.contributions div.commentList').each(function(i){
-	        $(this).attr('id','commentList' + (i+1));
+	        $(this).attr('id','listcommentB' + (i+1));
 	    });
 	});
 	</script>
+
+
 
 
 </head>
@@ -153,7 +156,11 @@
 				</div>
 				<div class="insert_date"><i class="fa fa-clock-o" ></i><fmt:formatDate value="${contribution.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 			</div>
-			<div class="text"><c:out value="${contribution.text}"/></div>
+
+			<c:forEach var="str" items="${fn:split(contribution.text,'
+') }" >
+				${str}<br>
+			</c:forEach>
 
 			<form action="deleteContribution" method="post">
 				<input type="hidden" name="contributionId" id="contributionId" value="${contribution.id}" />
@@ -174,11 +181,11 @@
 				<input class="button-submit" type="submit" value="コメントする" />
 			</form>
 
-			<div class = "commentView" id = "commentView">
-				<button>コメント表示 </button>
+			<div class="comment-button-wrapper">
+				<input class="commentB" id="commentB" type="button" value="コメントの表示・非表示を切り替え" onclick="commentView(this.id);">
 			</div>
 
-			<div class = "commentList shadow" id="commentList" >
+			<div class = "commentList shadow" id="listcommentB" >
 			<c:forEach items="${comments}" var="comment">
 				<div class="comment">
 					<c:if test="${contribution.id == comment.contribution_id}" >
@@ -190,7 +197,12 @@
 						</div>
 
 						<div class="insert_date"><i class="fa fa-clock-o" ></i><fmt:formatDate value="${comment.insert_date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
-						<div class="text"><c:out value="${comment.text}" /></div>
+
+						<c:forEach var="str" items="${fn:split(comment.text,'
+') }" >
+							${str}<br>
+						</c:forEach>
+
 						<form action="commentDelete" method="post">
 							<input type="hidden" name="commentId" id="commentId" value="${comment.id}" />
 								<c:choose>
