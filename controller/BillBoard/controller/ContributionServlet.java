@@ -38,13 +38,11 @@ public class ContributionServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 
 		List<String> messages = new ArrayList<String>();
-
-		HttpSession session = request.getSession();
-		Contribution contribution = new Contribution();
-
 		List<String> categories = new ArrayList<String>();
+		Contribution contribution = new Contribution();
 		ContributionService contributionService = new ContributionService();
 		categories = contributionService.getAllCategory();
+		HttpSession session = request.getSession();
 
 		User user = new User();
 		user = (User) session.getAttribute("loginUser");
@@ -63,7 +61,6 @@ public class ContributionServlet extends HttpServlet {
 		if(isValid(request, messages) == true) {
 
 			new ContributionService().register(contribution);
-
 			response.sendRedirect("./");
 		} else {
 			session.setAttribute("errorMessages", messages);
@@ -82,17 +79,17 @@ public class ContributionServlet extends HttpServlet {
 		String selectCategory = request.getParameter("selectCategory");
 		String newCategory = request.getParameter("newCategory");
 
-		if (StringUtils.isEmpty(subject) == true) {
+		if (StringUtils.isBlank(subject) == true) {
 			messages.add("件名を入力してください");
 		}
 		if (subject.length() > 30){
-			messages.add("件名は30文字以下です");
+			messages.add("件名は30字以下です");
 		}
-		if (StringUtils.isEmpty(text) == true) {
+		if (StringUtils.isBlank(text) == true) {
 			messages.add("本文を入力してください");
 		}
 		if (text.length() > 1000){
-			messages.add("本文は1000文字以下です");
+			messages.add("本文は1000字以下です");
 		}
 		if (selectCategory.isEmpty() && newCategory.isEmpty()) {
 			messages.add("カテゴリーを入力、または選択してください");
@@ -101,7 +98,7 @@ public class ContributionServlet extends HttpServlet {
 			messages.add("カテゴリーは入力、または選択のどちらかひとつしかできません");
 		}
 		if (newCategory.length() > 10){
-			messages.add("カテゴリーは10文字以下です");
+			messages.add("カテゴリーは10字以下です");
 		}
 		if (messages.size() == 0) {
 			return true;

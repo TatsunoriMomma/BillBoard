@@ -29,7 +29,6 @@ public class LoginFilter implements Filter{
 			String loginURI = "/BillBoard/login";
 			List<String> messages = new ArrayList<String>() ;
 
-			//ログインサーブレット,JSP,.cssじゃない時
 			if (!target.equals(loginURI) && !target.equals("/login.jsp") && !target.matches(".+.css")){
 				if (session == null){
 					session = ((HttpServletRequest)request).getSession(true);
@@ -69,7 +68,6 @@ public class LoginFilter implements Filter{
 								return;
 							}
 						}
-
 					}
 				}
 			}

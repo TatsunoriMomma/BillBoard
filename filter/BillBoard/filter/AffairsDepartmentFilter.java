@@ -28,7 +28,6 @@ public class AffairsDepartmentFilter implements Filter{
 
 			HttpSession session = ((HttpServletRequest)request).getSession(false);
 
-
 			String loginURI = "/BillBoard/login";
 			List<String> messages = new ArrayList<String>() ;
 
@@ -47,18 +46,17 @@ public class AffairsDepartmentFilter implements Filter{
 					((HttpServletResponse)response).sendRedirect(loginURI);
 					return;
 				} else {
-				int branchId = loginUser.getBranch_id();
-				int departmentId = loginUser.getDepartment_id();
-				if (!(branchId == HEAD_OFFICE && departmentId == AFFIAIRS_DEPATMENT)) {
-					messages.add("権限がありません");
-					session.setAttribute("errorMessages", messages);
-					((HttpServletResponse)response).sendRedirect("./");
-					return;
+					int branchId = loginUser.getBranch_id();
+					int departmentId = loginUser.getDepartment_id();
+					if (!(branchId == HEAD_OFFICE && departmentId == AFFIAIRS_DEPATMENT)) {
+						messages.add("権限がありません");
+						session.setAttribute("errorMessages", messages);
+						((HttpServletResponse)response).sendRedirect("./");
+						return;
+					}
 				}
 			}
-
-			}
-			//System.out.println("AffairsDepartmentFilterが実行されました。");
+		//System.out.println("AffairsDepartmentFilterが実行されました。");
 		chain.doFilter(request, response);
 
 		}catch (ServletException e){

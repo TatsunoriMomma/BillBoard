@@ -24,7 +24,6 @@ public class CommentDeleteServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 
 		int commentId = Integer.parseInt(request.getParameter("commentId"));
-
 		new CommentService().delete(commentId);
 		response.sendRedirect("./");
 

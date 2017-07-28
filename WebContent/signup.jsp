@@ -34,19 +34,19 @@
 <form action="signup" method="post"><br />
 
 	<h6 class="note"><label for="loginId">ログインID</label></h6>
-	<div class="subnote"><label for="loginId">(半角英数6文字以上20字以下)</label></div>
+	<div class="subnote"><label for="loginId">(半角英数6字以上20字以下)</label></div>
 	<br/>
 	<input type="text" name="loginId" id="loginId" value="${user.login_id}"/>
 	<br />
 
 	<h6 class="note"><label for="name">名前</label></h6>
-	<div class="subnote"><label for="name">(10文字以下)</label></div>
+	<div class="subnote"><label for="name">(10字以下)</label></div>
 	<br />
 	<input type="text" name="name" id="name" value="${user.name}"/>
 	<br />
 
 	<h6 class="note"><label for="password">パスワード</label></h6>
-	<div class="subnote"><label for="name">半角英数記号6文字以上20字以下</label></div>
+	<div class="subnote"><label for="name">(半角英数記号6字以上20字以下)</label></div>
 	<br />
 	<input name="password" type="password" id="password"/>
 	<br />

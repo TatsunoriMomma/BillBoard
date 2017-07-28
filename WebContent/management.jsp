@@ -38,9 +38,6 @@
 
 <div class="main-contents">
 
-
-
-
 <table class="u-full-width shadow">
 	<thead>
     <tr>

@@ -24,7 +24,6 @@ public class ContributionDeleteServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 
 		int contributionId = Integer.parseInt(request.getParameter("contributionId"));
-
 		new ContributionService().delete(contributionId);
 		response.sendRedirect("./");
 

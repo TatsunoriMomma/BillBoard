@@ -17,7 +17,9 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css" >
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 	<script type="text/javascript" src='<c:url value="./js/main.js"/>'></script>
 
@@ -45,35 +47,25 @@
 	        $(this).attr('id','maxtext' + (i+1));
 	    });
 	});
-	</script>
 
-	<script type="text/javascript">
 	$(function(){
 	    $('div.contributions textarea.text').each(function(i){
 	        $(this).attr('id','text' + (i+1));
 	    });
 	});
-	</script>
 
-	<script type="text/javascript">
 	$(function(){
 	    $('div.contributions input.commentB').each(function(i){
 	        $(this).attr('id','commentB' + (i+1));
 	    });
 	});
-	</script>
 
-	<script type="text/javascript">
 	$(function(){
 	    $('div.contributions div.commentList').each(function(i){
 	        $(this).attr('id','listcommentB' + (i+1));
 	    });
 	});
 	</script>
-
-
-
-
 </head>
 <body>
 
@@ -81,7 +73,9 @@
 <h4>わったい菜掲示板</h4>
 <div class="links">
 <a class="contribution-tran" href="contribution">新規投稿</a>
+
 <a class="management-tran" href="management">ユーザー管理</a>
+
 <a class="logout-tran" href="logout">ログアウト</a>
 </div>
 </div>
@@ -150,7 +144,7 @@
 				<h5 class="subject">件名:<c:out value="${contribution.subject}"/></h5>
 				<div class="name"><i class="fa fa-user" ></i>
 					<c:choose>
-						<c:when test="${contribution.name == null }" ><c:out value="このユーザーは削除されました"/></c:when>
+						<c:when test="${contribution.name == null }" ><c:out value="削除されたユーザー"/></c:when>
 						<c:when test="${contribution.name != null }"><c:out value="${contribution.name}"/></c:when>
 					</c:choose>
 				</div>
@@ -176,13 +170,13 @@
 			<form action="comment" method="post">
 				<label for="text"></label>
 				<textarea  class="u-full-width text" name="text" id="text" maxlength=500 onkeyup ="CountDownLength(this.id,value,500);"></textarea>
-				<span class="maxtext" id="maxtext">あと500文字</span>
+				<span class="maxtext" id="maxtext">あと500字</span>
 				<input type="hidden" name="contributionId" id="contributionId" value="${contribution.id}" />
-				<input class="button-submit" type="submit" value="コメントする" />
+				<input class="button-submit" type="submit" value="コメント" />
 			</form>
 
 			<div class="comment-button-wrapper">
-				<input class="commentB" id="commentB" type="button" value="コメントの表示・非表示を切り替え" onclick="commentView(this.id);">
+				<input class="commentB" id="commentB" type="button" value="コメント表示・非表示" onclick="commentView(this.id);">
 			</div>
 
 			<div class = "commentList shadow" id="listcommentB" >
@@ -191,7 +185,7 @@
 					<c:if test="${contribution.id == comment.contribution_id}" >
 						<div class="name"><i class="fa fa-user" ></i>
 							<c:choose>
-								<c:when test="${comment.name == null }" ><c:out value="このユーザーは削除されました"/></c:when>
+								<c:when test="${comment.name == null }" ><c:out value="削除されたユーザー"/></c:when>
 								<c:when test="${comment.name != null }"><c:out value="${comment.name}"/></c:when>
 							</c:choose>
 						</div>

@@ -44,7 +44,6 @@ public class SignUpServlet extends HttpServlet {
 		List<Branch> branches = new BranchService().getAllBranch();
 		List<Department> departments = new DepartmentService().getAllDepartment();
 
-
 		HttpSession session = request.getSession();
 
 		User user = new User();
@@ -54,7 +53,6 @@ public class SignUpServlet extends HttpServlet {
 		user.setBranch_id(Integer.parseInt(request.getParameter("branchId")));
 		user.setDepartment_id(Integer.parseInt(request.getParameter("departmentId")));
 		user.setIs_working(0);
-
 
 		if (isValid(request, messages) == true) {
 
@@ -104,7 +102,6 @@ public class SignUpServlet extends HttpServlet {
 		if (!checkPassword.equals(password)){
 		messages.add("パスワード（確認用）が正しくありません");
 		}
-
 		if(branch == 0){
 			messages.add("支店を選択してください");
 		}

@@ -55,7 +55,7 @@ function double(form) {
 	<div class="row">
 
 	<div class="six columns">
-		<label for="subject">件名(30文字以下)</label>
+		<label for="subject">件名(30字以下)</label>
 		<input type="text" class="u-full-width" name="subject" id="subject" maxlength=30 value="${contribution.subject}" /><br />
 	</div>
 
@@ -74,16 +74,16 @@ function double(form) {
 	</div>
 
 	<div class="three columns">
-		<label for="newCategory">新規カテゴリー(10文字以下)</label>
+		<label for="newCategory">新規カテゴリー(10字以下)</label>
 		<input type="text" name="newCategory" id="newCategory" maxlength=10 value="${newCategory}"/>
 	</div>
 
 	</div>
 
 
-	<label for="text">本文(1000文字以下)</label>
+	<label for="text">本文(1000字以下)</label>
 	<textarea class="u-full-width" rows="20" name="text" id="text" maxlength=1000 onkeyup ="CountDownLength('text',value,1000);">${contribution.text}</textarea>
-	<span id="maxtext">あと1000文字</span>
+	<span id="maxtext">あと1000字</span>
 	<input class="button-submit" type="submit" value="登録" /> <br />
 </form>
 </div>

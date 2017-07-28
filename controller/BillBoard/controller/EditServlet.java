@@ -57,7 +57,6 @@ public class EditServlet extends HttpServlet {
 		DepartmentService departmentService = new DepartmentService();
 		departments = departmentService.getAllDepartment();
 
-
 		request.setAttribute("editUser", editUser);
 		request.setAttribute("branches", branches);
 		request.setAttribute("departments", departments);
@@ -70,7 +69,6 @@ public class EditServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException{
 
 		List<String> messages = new ArrayList<String>();
-
 		List<Branch> branches = new ArrayList<Branch>();
 		List<Department> departments = new ArrayList<Department>();
 		BranchService branchService = new BranchService();
@@ -78,9 +76,7 @@ public class EditServlet extends HttpServlet {
 		DepartmentService departmentService = new DepartmentService();
 		departments = departmentService.getAllDepartment();
 
-
 		HttpSession session = request.getSession();
-
 
 		User user = new User();
 		user.setId(Integer.parseInt(request.getParameter("id")));
@@ -93,18 +89,14 @@ public class EditServlet extends HttpServlet {
 			user.setPassword(request.getParameter("password"));
 		}
 
-
 		if (isValid(request, messages) == true) {
-
 			try {
 				new UserService().update(user);
-
 			} catch (NoRowsUpdatedRuntimeException e) {
 				messages.add("他の人によって更新されています。最新のデータを表示しました。データを確認してください。");
 				session.setAttribute("errorMessages", messages);
 				request.getRequestDispatcher("/edit.jsp");
 			}
-
 			response.sendRedirect("management");
 		} else {
 			session.setAttribute("errorMessages", messages);
@@ -134,7 +126,6 @@ public class EditServlet extends HttpServlet {
 		} else if (loginId.length() < 6 || loginId.length() > 20){
 				messages.add("ログインIDの桁数に誤りがあります");
 		}
-
 		if (checkExistUser != null && id != checkExistUser.getId() ){
 			messages.add("指定されたログインIDは既に使用されています");
 		}
@@ -164,5 +155,4 @@ public class EditServlet extends HttpServlet {
 			return false;
 		}
 	}
-
 }

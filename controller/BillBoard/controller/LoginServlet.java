@@ -34,7 +34,6 @@ public class LoginServlet extends HttpServlet{
 
 		HttpSession session = request.getSession();
 
-
 		LoginService loginService = new LoginService();
 		User user = loginService.login(loginId,password);
 

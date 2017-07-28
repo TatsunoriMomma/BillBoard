@@ -22,7 +22,6 @@ public class UserDeleteServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 
 		int userId = Integer.parseInt(request.getParameter("editUserId"));
-
 		new UserService().delete(userId);
 		response.sendRedirect("management");
 	}
